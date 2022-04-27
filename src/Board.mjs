@@ -17,6 +17,7 @@ export class Board {
     this.middle = (width % 2 === 0 ? width / 2 - 1 : Math.floor(width / 2));
     this.falling = false;
     this.fallingBlock = 0;
+    this.fallingPosition;
   }
 
   drop(block) {
@@ -25,8 +26,9 @@ export class Board {
     console.log('middle ', this.middle)
     let start = (block.getSize() === 1 ? this.middle : this.middle - Math.floor(block.getSize() / 2))
     this.board[0][start] = block;
+    let coordinates = [0, start];
     console.log('will start at grid[0][', start)
-    this.falling = block;
+    this.falling = { block, coordinates };
   }
 
   hasFalling() {
