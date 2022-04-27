@@ -4,6 +4,11 @@ export class RotatingShape {
   constructor(shape) {
     if (Array.isArray(shape)) this.shape = shape
     else this.shape = this.createShape(shape);
+    this.rotates = this.rotatable();
+  }
+
+  rotatable(){
+    return true
   }
 
   createShape(string){
@@ -21,18 +26,22 @@ export class RotatingShape {
   }
 
   rotateRight(){
-    return new RotatingShape(this.shape.map((_, colIndex) => this.shape.slice().reverse().map(row => {return row[colIndex]})));
+    if (this.rotates) return new RotatingShape(this.centering(this.shape.map((_, colIndex) => this.shape.slice().reverse().map(row => {return row[colIndex]}))));
+    else return this
   }
 
   rotateLeft(){
-    return new RotatingShape(this.centering(this.shape.map((_, colIndex) => this.shape.map(row => {return row[this.shape.length-1-colIndex]}))))
+    if (this.rotates) return new RotatingShape(this.centering(this.shape.map((_, colIndex) => this.shape.map(row => {return row[this.shape.length-1-colIndex]}))))
+    else return this
   }
 
   centering(shape){
-    if (!shape[0].map(elem => elem === '.' ? true : false).includes(false)){
+    if (!shape[0].map(elem => elem === '.').includes(false) && shape[shape.length-1].map(elem => elem === '.').includes(false)){
       shape.shift();
       shape.push(shape[0].map(() => '.'));
       return shape
+    } else if (!shape.map(elem => elem[0] === '.').includes(false) && shape.map(elem => elem[shape.length-1] === '.').includes(false)){
+      return shape.map(elem => {elem.shift(); elem.push('.'); return elem})
     } else {
       return shape
     }

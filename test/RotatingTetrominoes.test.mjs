@@ -9,8 +9,10 @@ function distinctOrientations(shape) {
   for (let i = 0; i < 10; i++) {
     distinct.add(goingRight.toString());
     goingRight = goingRight.rotateRight();
+    console.log('right\n', goingRight.toString())
     distinct.add(goingLeft.toString());
     goingLeft = goingLeft.rotateLeft();
+    console.log('left\n', goingLeft.toString())
   }
   return distinct;
 }
@@ -82,7 +84,7 @@ describe("The I shape", () => {
     );
   });
 
-  xit("has 2 distinct orientations", () => {
+  it("has 2 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(2);
   });
 });
