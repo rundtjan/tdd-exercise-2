@@ -19,6 +19,16 @@ export class Board {
     this.grid[0][this.middle] = block.toString();
   }
 
+  tick(){
+    for (var i = this.height-1; i >= 0; i--){
+      for (var j = 0; j < this.width; j++){
+        if (i > 0) this.grid[i][j] = this.grid[i-1][j]
+        else this.grid[i][j] = '.'
+      }
+    }
+
+  }
+
   toString() {
     var output = ''
     this.grid.forEach(elem => {
