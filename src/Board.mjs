@@ -13,10 +13,12 @@ export class Board {
       }
     }
     this.middle = Math.floor(width / 2);
+    this.falling = false
   }
 
   drop(block){
-    this.grid[0][this.middle] = block.toString();
+    if (this.falling) throw 'already falling';
+    else this.grid[0][this.middle] = block.toString(); this.falling = true;
   }
 
   tick(){
