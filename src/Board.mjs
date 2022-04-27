@@ -14,11 +14,12 @@ export class Board {
     }
     this.middle = Math.floor(width / 2);
     this.falling = false
+    this.fallingBlock = 0
   }
 
   drop(block){
     if (this.falling) throw 'already falling';
-    else block.setFalling(true); this.grid[0][this.middle] = block; this.falling = true;
+    else block.setNumber(this.fallingBlock); this.grid[0][this.middle] = block; this.falling = true;
   }
 
   hasFalling(){
@@ -32,14 +33,16 @@ export class Board {
           if (this.grid[i][j] == '.'){
             this.grid[i][j] = this.grid[i-1][j]
           } else {
-            if (this.grid[i][j].isFalling()) this.grid[i][j].setFalling(false); this.falling = false;
+            if (this.grid[i][j].getNumber() == this.fallingBlock) {
+              this.fallingBlock++;
+              this.falling = false;
+            }
           }
         }
         else if (i > 0 && i < this.height-1) this.grid[i][j] = this.grid[i-1][j]
         else this.grid[i][j] = '.'
       }
     }
-
   }
 
   toString() {
@@ -51,6 +54,8 @@ export class Board {
       });
       output+= '\n'
     })
+    console.log(output)
+    console.log(this.falling)
     return output
   }
 }
