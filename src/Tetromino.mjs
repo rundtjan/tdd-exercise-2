@@ -6,4 +6,6 @@ export class Tetromino {
 
   static I_SHAPE = new RotatingShape('..........IIII...........')
 
+  static O_SHAPE = new RotatingShape('.OO.OO...')
+
 }
