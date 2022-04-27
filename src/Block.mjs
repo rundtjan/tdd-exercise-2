@@ -3,6 +3,15 @@ export class Block {
 
   constructor(symbol) {
     this.symbol = symbol;
+    this.falling = false
+  }
+
+  setFalling(falling){
+    this.falling = falling
+  }
+
+  isFalling(){
+    return this.falling
   }
 
   toString(){

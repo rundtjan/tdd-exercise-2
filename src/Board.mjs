@@ -18,7 +18,7 @@ export class Board {
 
   drop(block){
     if (this.falling) throw 'already falling';
-    else this.grid[0][this.middle] = block.toString(); this.falling = true;
+    else block.setFalling(true); this.grid[0][this.middle] = block; this.falling = true;
   }
 
   hasFalling(){
@@ -28,7 +28,14 @@ export class Board {
   tick(){
     for (var i = this.height-1; i >= 0; i--){
       for (var j = 0; j < this.width; j++){
-        if (i > 0) this.grid[i][j] = this.grid[i-1][j]
+        if (i == this.height-1) {
+          if (this.grid[i][j] == '.'){
+            this.grid[i][j] = this.grid[i-1][j]
+          } else {
+            if (this.grid[i][j].isFalling()) this.grid[i][j].setFalling(false); this.falling = false;
+          }
+        }
+        else if (i > 0 && i < this.height-1) this.grid[i][j] = this.grid[i-1][j]
         else this.grid[i][j] = '.'
       }
     }
@@ -38,10 +45,12 @@ export class Board {
   toString() {
     var output = ''
     this.grid.forEach(elem => {
-      elem.forEach(elemint => output+=elemint);
+      elem.forEach(elemint => {
+        if (elemint === '.') output+=elemint;
+        else output+=elemint.toString()
+      });
       output+= '\n'
     })
     return output
-    return "...\n...\n...\n";
   }
 }
