@@ -1,7 +1,11 @@
 export class Block {
   color;
 
-  constructor(color) {
-    this.color = color;
+  constructor(symbol) {
+    this.symbol = symbol;
+  }
+
+  toString(){
+    return this.symbol
   }
 }
