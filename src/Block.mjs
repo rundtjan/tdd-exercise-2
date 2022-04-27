@@ -3,8 +3,7 @@ export class Block {
 
   constructor(symbol) {
     this.symbol = symbol;
-    this.number = 99999
-    this.falling = false
+    this.number = 999999
   }
 
   setNumber(number){
@@ -13,14 +12,6 @@ export class Block {
 
   getNumber(){
     return this.number
-  }
-
-  setFalling(falling){
-    this.falling = falling
-  }
-
-  isFalling(){
-    return this.falling
   }
 
   toString(){

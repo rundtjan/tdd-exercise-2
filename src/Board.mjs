@@ -29,18 +29,20 @@ export class Board {
   tick(){
     for (var i = this.height-1; i >= 0; i--){
       for (var j = 0; j < this.width; j++){
-        if (i == this.height-1) {
-          if (this.grid[i][j] == '.'){
-            this.grid[i][j] = this.grid[i-1][j]
-          } else {
-            if (this.grid[i][j].getNumber() == this.fallingBlock) {
+        if (this.grid[i][j] != '.'){
+          if (this.grid[i][j].getNumber() === this.fallingBlock){
+            if (i === this.height-1) {
+              this.fallingBlock++; 
+              this.falling = false;
+            } else if (i < this.height-1 && this.grid[i+1][j] === '.'){
+              this.grid[i+1][j] = this.grid[i][j];
+              this.grid[i][j] = '.';
+            } else {
               this.fallingBlock++;
               this.falling = false;
             }
           }
         }
-        else if (i > 0 && i < this.height-1) this.grid[i][j] = this.grid[i-1][j]
-        else this.grid[i][j] = '.'
       }
     }
   }
