@@ -23,10 +23,8 @@ export class RotatingShape {
   }
 
   rotateRight(){
-    let tmp = new Array(this.shape.length);
-    for (var i = 0; i < tmp.length; i++){
-      tmp[i] = new Array(tmp.length);
-    }
+    let tmp = [];
+    this.shape.forEach(elem => tmp.push(new Array(this.shape.length)))
     this.shape.forEach((element, index) => {
       element.forEach((elem, ind) =>{
         tmp[ind][tmp.length-1-index] = elem
