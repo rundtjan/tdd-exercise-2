@@ -56,8 +56,6 @@ export class Board {
       });
       output+= '\n'
     })
-    console.log(output)
-    console.log(this.falling)
     return output
   }
 }
