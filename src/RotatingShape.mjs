@@ -31,6 +31,17 @@ export class RotatingShape {
     return new RotatingShape(tmp);
   }
 
+  rotateLeft(){
+    let tmp = [];
+    this.shape.forEach(elem => tmp.push(new Array(this.shape.length)))
+    this.shape.forEach((element, index) => {
+      element.forEach((elem, ind) =>{
+        tmp[tmp.length-1-ind][index] = elem
+      })
+    })
+    return new RotatingShape(tmp);
+  }
+
   toString(){
     var output = ''
     this.shape.forEach(elem => {
