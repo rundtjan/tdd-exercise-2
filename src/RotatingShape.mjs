@@ -25,7 +25,17 @@ export class RotatingShape {
   }
 
   rotateLeft(){
-    return new RotatingShape(this.shape.map((_, colIndex) => this.shape.map(row => {return row[this.shape.length-1-colIndex]})))
+    return new RotatingShape(this.centering(this.shape.map((_, colIndex) => this.shape.map(row => {return row[this.shape.length-1-colIndex]}))))
+  }
+
+  centering(shape){
+    if (!shape[0].map(elem => elem === '.' ? true : false).includes(false)){
+      shape.shift();
+      shape.push(shape[0].map(() => '.'));
+      return shape
+    } else {
+      return shape
+    }
   }
 
   toString(){
