@@ -21,7 +21,7 @@ export class RotatingShape {
     return this.number
   }
 
-  getSize () {
+  getSize() {
     return this.shape.length
   }
 

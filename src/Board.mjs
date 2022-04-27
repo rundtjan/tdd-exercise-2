@@ -21,7 +21,8 @@ export class Board {
     if (this.falling) throw "already falling";
     else block.setNumber(this.fallingBlock);
     console.log('middle ', this.middle)
-    this.grid[0][this.middle] = block;
+    let start = (block.getSize() === 1 ? this.middle : this.middle - Math.floor(block.getSize() / 2))
+    this.grid[0][start] = block;
     this.falling = true;
   }
 
