@@ -95,6 +95,7 @@ export class RotatingShape {
   }
 
   toString() {
+    if (this.shape.length === 1) return this.shape[0][0];
     var output = "";
     this.shape.forEach((elem) => {
       elem.forEach((elemint) => {
