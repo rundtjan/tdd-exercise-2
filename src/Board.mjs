@@ -32,7 +32,7 @@ export class Board {
   }
 
   drawOnBoard(block, start){
-    this.board[0][start] = block;
+    if (block.getSize() === 1) this.board[0][start] = block;
   }
 
   hasFalling() {
