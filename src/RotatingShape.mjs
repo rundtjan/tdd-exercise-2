@@ -7,16 +7,21 @@ export class RotatingShape {
   }
 
   createShape(string){
-    let arr = string.split('\n')
+    let shape = string.replace(/\s/g, '')
+    let width;
+    shape.length == 9 ? width = 3 : width = 5; 
+    /*let arr = string.split('\n')
     arr.forEach((element, index) => {
       arr[index] = element.replace(/\s/g, "")
     });
-    let width = arr[0].length;
+    let width = arr[0].length;*/
     let grid = new Array(width);
+    let z = 0
     for (var i = 0; i < width; i++){
       grid[i] = new Array(width);
       for (var j = 0; j < width; j++){
-        grid[i][j] = arr[i][j];
+        grid[i][j] = shape[z];
+        z++;
       }
     }
     return grid
