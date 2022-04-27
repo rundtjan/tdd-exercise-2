@@ -21,6 +21,10 @@ export class Board {
     else this.grid[0][this.middle] = block.toString(); this.falling = true;
   }
 
+  hasFalling(){
+    return this.falling
+  }
+
   tick(){
     for (var i = this.height-1; i >= 0; i--){
       for (var j = 0; j < this.width; j++){
