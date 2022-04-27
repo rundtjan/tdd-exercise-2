@@ -25,6 +25,10 @@ export class RotatingShape {
     return this.shape.length
   }
 
+  getShape() {
+    return this.shape
+  }
+
   createShape(string) {
     let shape = string.replace(/\s/g, "");
     let width = Math.sqrt(shape.length)
