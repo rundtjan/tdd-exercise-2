@@ -9,8 +9,8 @@ export class RotatingShape {
   }
 
   rotatable() {
-    let check = !this.shape[0].includes("O")
-    return check
+    let check = (this.shape[0].includes("O") || this.shape.length === 1)
+    return !check
   }
 
   setNumber(number) {
