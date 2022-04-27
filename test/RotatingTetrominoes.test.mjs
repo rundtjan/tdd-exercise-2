@@ -9,10 +9,8 @@ function distinctOrientations(shape) {
   for (let i = 0; i < 10; i++) {
     distinct.add(goingRight.toString());
     goingRight = goingRight.rotateRight();
-    console.log('rigth\n', goingRight.toString())
     distinct.add(goingLeft.toString());
     goingLeft = goingLeft.rotateLeft();
-    console.log('left\n', goingLeft.toString())
   }
   return distinct;
 }

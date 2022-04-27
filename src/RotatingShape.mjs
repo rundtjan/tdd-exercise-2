@@ -5,15 +5,24 @@ export class RotatingShape {
     if (Array.isArray(shape)) this.shape = shape;
     else this.shape = this.createShape(shape);
     this.rotates = this.rotatable();
+    this.number = 9999999;
   }
 
   rotatable() {
     return !this.shape[0].includes("O");
   }
 
+  setNumber(number) {
+    this.number = number
+  }
+
+  getNumber() {
+    return this.number
+  }
+
   createShape(string) {
     let shape = string.replace(/\s/g, "");
-    let width = shape.length == 9 ? 3 : 5;
+    let width = Math.sqrt(shape.length)
     let grid = Array(width)
       .fill()
       .map(() => Array(width));
@@ -72,7 +81,7 @@ export class RotatingShape {
       !shape.map((elem) => elem[0] === ".").includes(false) &&
       shape.map((elem) => elem[shape.length - 1] === ".").includes(false) &&
       !shape[0].map((elem) => elem === ".").includes(false) &&
-      !shape[shape.length-1].map((elem) => elem === ".").includes(false)
+      !shape[shape.length - 1].map((elem) => elem === ".").includes(false)
     ) {
       return shape.map((elem) => {
         elem.shift();
