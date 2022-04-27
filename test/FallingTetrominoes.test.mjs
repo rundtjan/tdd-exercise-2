@@ -15,7 +15,20 @@ describe("Falling tetrominoes", () => {
     board = new Board(10, 6);
   });
 
-  xit("start from the top middle", () => {
+  it("board is correct shape", () => {
+    //board.drop(Tetromino.T_SHAPE);
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  it("start from the top middle", () => {
     board.drop(Tetromino.T_SHAPE);
 
     expect(board.toString()).to.equalShape(
