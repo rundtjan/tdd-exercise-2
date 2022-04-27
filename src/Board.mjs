@@ -25,10 +25,14 @@ export class Board {
     else block.setNumber(this.fallingBlock);
     console.log('middle ', this.middle)
     let start = (block.getSize() === 1 ? this.middle : this.middle - Math.floor(block.getSize() / 2))
-    this.board[0][start] = block;
+    this.drawOnBoard(block, start)
     let coordinates = [0, start];
     console.log('will start at grid[0][', start)
     this.falling = { block, coordinates };
+  }
+
+  drawOnBoard(block, start){
+    this.board[0][start] = block;
   }
 
   hasFalling() {
