@@ -6,10 +6,12 @@ export class Board {
     this.width = width;
     this.height = height;
     this.grid = new Array(height);
+    this.board = new Array(height);
     for (var i = 0; i < this.grid.length; i++) {
       this.grid[i] = new Array(width);
+      this.board[i] = new Array(width)
       for (var j = 0; j < this.grid[i].length; j++) {
-        this.grid[i][j] = ".";
+        this.board[i][j] = ".";
       }
     }
     this.middle = (width % 2 === 0 ? width / 2 - 1 : Math.floor(width / 2));
@@ -22,7 +24,8 @@ export class Board {
     else block.setNumber(this.fallingBlock);
     console.log('middle ', this.middle)
     let start = (block.getSize() === 1 ? this.middle : this.middle - Math.floor(block.getSize() / 2))
-    this.grid[0][start] = block;
+    this.board[0][start] = block;
+    console.log('will start at grid[0][', start)
     this.falling = true;
   }
 
@@ -33,14 +36,14 @@ export class Board {
   tick() {
     for (var i = this.height - 1; i >= 0; i--) {
       for (var j = 0; j < this.width; j++) {
-        if (this.grid[i][j] != ".") {
-          if (this.grid[i][j].getNumber() === this.fallingBlock) {
+        if (this.board[i][j] != ".") {
+          if (this.board[i][j].getNumber() === this.fallingBlock) {
             if (i === this.height - 1) {
               this.fallingBlock++;
               this.falling = false;
-            } else if (i < this.height - 1 && this.grid[i + 1][j] === ".") {
-              this.grid[i + 1][j] = this.grid[i][j];
-              this.grid[i][j] = ".";
+            } else if (i < this.height - 1 && this.board[i + 1][j] === ".") {
+              this.board[i + 1][j] = this.board[i][j];
+              this.board[i][j] = ".";
             } else {
               this.fallingBlock++;
               this.falling = false;
@@ -53,7 +56,7 @@ export class Board {
 
   toString() {
     var output = "";
-    this.grid.forEach((elem) => {
+    this.board.forEach((elem) => {
       elem.forEach((elemint) => {
         if (elemint === ".") output += elemint;
         else output += elemint.toString();
