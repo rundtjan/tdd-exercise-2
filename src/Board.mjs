@@ -26,11 +26,11 @@ export class Board {
     let start = (block.getSize() === 1 ? this.middle : this.middle - Math.floor(block.getSize() / 2))
     this.board[0][start] = block;
     console.log('will start at grid[0][', start)
-    this.falling = true;
+    this.falling = block;
   }
 
   hasFalling() {
-    return this.falling;
+    return (!this.falling === false);
   }
 
   tick() {
