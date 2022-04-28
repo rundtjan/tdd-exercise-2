@@ -92,27 +92,6 @@ export class Board {
     return canFall;
   }
 
-  tick2() {
-    for (var i = this.height - 1; i >= 0; i--) {
-      for (var j = 0; j < this.width; j++) {
-        if (this.board[i][j] != ".") {
-          if (this.board[i][j].getNumber() === this.fallingBlock) {
-            if (i === this.height - 1) {
-              this.fallingBlock++;
-              this.falling = false;
-            } else if (i < this.height - 1 && this.board[i + 1][j] === ".") {
-              this.board[i + 1][j] = this.board[i][j];
-              this.board[i][j] = ".";
-            } else {
-              this.fallingBlock++;
-              this.falling = false;
-            }
-          }
-        }
-      }
-    }
-  }
-
   toString2() {
     var output = "";
     this.board.forEach((elem) => {
