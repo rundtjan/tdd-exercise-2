@@ -53,6 +53,7 @@ export class Board {
         break;
       case 'right':
         testBlock = this.falling.block.rotateRight();
+        testX = this.falling.x - 1;
     }
     for (let i = 0; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
@@ -65,13 +66,14 @@ export class Board {
         }
       }
     }
-    this.falling.x = 0;
+    this.falling.x = testX;
     return true;       
   }
 
   canRotate(direction) {
     if (!this.falling.block.rotatable()) return;
     if (direction === 'left' && this.falling.x < 0) this.checkTurningSpace(direction)
+    else if (direction === 'right' && this.falling.x + this.falling.block.getSize() > this.board[0].length) this.checkTurningSpace(direction)
     let testBlock;
     switch(direction){
       case 'left':
