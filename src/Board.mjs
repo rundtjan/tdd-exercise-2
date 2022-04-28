@@ -60,20 +60,7 @@ export class Board {
       case "rightEdge":
         testX = this.falling.x - 1;
     }
-
-    for (let i = 0; i < testBlock.getSize(); i++) {
-      for (let j = 0; j < testBlock.getSize(); j++) {
-        if (
-          testBlock.getShape()[i][j] != "." &&
-          this.board[this.falling.y + i][testX + j] != "." &&
-          this.falling.block.getShape()[i][j] === "."
-        ) {
-          return false;
-        }
-      }
-    }
-    this.falling.x = testX;
-    return true;
+    return this.newPositionOk(testBlock, testX);
   }
 
   canRotate(direction) {
@@ -103,6 +90,22 @@ export class Board {
         }
       }
     }
+    return true;
+  }
+
+  newPositionOk(testBlock, testX){
+    for (let i = 0; i < testBlock.getSize(); i++) {
+      for (let j = 0; j < testBlock.getSize(); j++) {
+        if (
+          testBlock.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][testX + j] != "." &&
+          this.falling.block.getShape()[i][j] === "."
+        ) {
+          return false;
+        }
+      }
+    }
+    this.falling.x = testX;
     return true;
   }
 
