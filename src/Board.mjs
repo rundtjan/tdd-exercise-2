@@ -44,7 +44,34 @@ export class Board {
     }
   }
 
+  checkTurningSpace(direction){
+    let testBlock, testX;
+    switch(direction){
+      case 'left':
+        testBlock = this.falling.block.rotateLeft();
+        testX = 0;
+        break;
+      case 'right':
+        testBlock = this.falling.block.rotateRight();
+    }
+    for (let i = 0; i < testBlock.getSize(); i++) {
+      for (let j = 0; j < testBlock.getSize(); j++) {
+        if (
+          testBlock.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][testX + j] != "." &&
+          this.falling.block.getShape()[i][j] === "."
+        ) {
+          return false;
+        }
+      }
+    }
+    this.falling.x = 0;
+    return true;       
+  }
+
   canRotate(direction) {
+    if (!this.falling.block.rotatable()) return;
+    if (direction === 'left' && this.falling.x < 0) this.checkTurningSpace(direction)
     let testBlock;
     switch(direction){
       case 'left':
