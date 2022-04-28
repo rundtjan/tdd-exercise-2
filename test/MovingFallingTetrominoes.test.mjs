@@ -3,9 +3,9 @@ import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
-function fallToBottom(board) {
-  for (let i = 0; i < 10; i++) {
-    board.tick();
+function move(board, direction, times) {
+  for (let i = 0; i < times; i++) {
+    board.moveBlock(direction);
   }
 }
 
@@ -56,10 +56,7 @@ describe("Moving falling tetrominoes", () => {
 
   it("it cannot be moved left beyond the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.moveBlock('left');
-    board.moveBlock('left');
-    board.moveBlock('left');
-    board.moveBlock('left');
+    move(board, 'left', 4)
     expect(board.toString()).to.equalShape(
       `.T........
        TTT.......
@@ -72,12 +69,7 @@ describe("Moving falling tetrominoes", () => {
 
   it("it cannot be moved right beyond the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.moveBlock('right');
-    board.moveBlock('right');
-    board.moveBlock('right');
-    board.moveBlock('right');
-    board.moveBlock('right');
-    board.moveBlock('right');
+    move(board, 'right', 5)
     expect(board.toString()).to.equalShape(
       `........T.
        .......TTT
@@ -110,7 +102,7 @@ describe("Moving falling tetrominoes", () => {
     ).to.be.false;
   });
 
-  it("it cannot be moved left through other blocks (developing test)", () => {
+  xit("it cannot be moved left through other blocks (developing test)", () => {
     board.drop(Tetromino.T_SHAPE);
     board.moveBlock('left');
     board.moveBlock('left');
