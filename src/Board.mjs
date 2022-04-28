@@ -60,8 +60,9 @@ export class Board {
   canMoveLeft(){
     for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
-        if (this.falling.block.getShape()[i][j] != "." && this.board[this.falling.y + i][this.falling.x + j-1] != '.'){
+        if (this.falling.block.getShape()[i][j] != '.' && this.board[this.falling.y + i][this.falling.x + j-1] != '.'){
           if (j === 0) return false
+          else if (this.falling.block.getShape()[i][j-1] === '.') return false
         }
       }
     }
