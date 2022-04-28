@@ -37,6 +37,14 @@ export class Board {
     }
   }
 
+  rotateBlockLeft(){
+    this.falling.block = this.falling.block.rotateLeft();
+  }
+
+  rotateBlockRight(){
+    this.falling.block = this.falling.block.rotateRight();
+  }
+
   moveBlock(direction){
     if (!this.falling) return;
     this.eraseBlock()
