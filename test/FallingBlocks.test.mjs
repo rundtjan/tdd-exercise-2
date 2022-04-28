@@ -7,7 +7,7 @@ describe("Falling blocks", () => {
   beforeEach(() => {
     board = new Board(3, 3);
   });
-/*
+
   it("The board starts empty", () => {
     expect(board.toString()).to.equalShape(
       `...
@@ -48,8 +48,6 @@ describe("Falling blocks", () => {
     });
   });
   
-
-  */
   describe("When a block reaches the bottom", () => {
     beforeEach(() => {
       board.drop(new Block("X"));

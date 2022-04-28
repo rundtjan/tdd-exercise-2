@@ -5,12 +5,10 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.grid = new Array(height);
     this.board = new Array(height);
-    for (var i = 0; i < this.grid.length; i++) {
-      this.grid[i] = new Array(width);
+    for (var i = 0; i < this.board.length; i++) {
       this.board[i] = new Array(width);
-      for (var j = 0; j < this.grid[i].length; j++) {
+      for (var j = 0; j < this.board[i].length; j++) {
         this.board[i][j] = ".";
       }
     }
