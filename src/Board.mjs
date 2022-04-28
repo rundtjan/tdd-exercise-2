@@ -82,6 +82,25 @@ export class Board {
     return true;
   }
 
+  blockCanFall() {
+    for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
+      for (let j = 0; j < this.falling.block.getSize(); j++) {
+        if (this.falling.block.getShape()[i][j] != ".") {
+          if (this.falling.y + i === this.board.length - 1) {
+            return false;
+            } else if (this.board[this.falling.y + i + 1][this.falling.x + j] != "."){
+              if (i === this.falling.block.getSize() - 1) {
+                return false;
+              } else if (this.falling.block.getShape()[i+1][j] === '.'){
+                return false;
+              }
+            }
+          }
+        }
+      }
+    return true;
+  }
+
   drawOnBoard() {
     if (this.falling) {
       if (this.falling.block.getSize() === 1) {
@@ -111,26 +130,6 @@ export class Board {
       this.drawOnBoard()
       this.falling = false;
     }
-  }
-
-  blockCanFall() {
-    let canFall = true;
-    for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
-      for (let j = 0; j < this.falling.block.getSize(); j++) {
-        if (this.falling.block.getShape()[i][j] != ".") {
-          if (this.falling.y + i === this.board.length - 1) {
-            canFall = false;
-            } else if (this.board[this.falling.y + i + 1][this.falling.x + j] != "."){
-              if (i === this.falling.block.getSize() - 1) {
-                canFall = false;
-              } else if (this.falling.block.getShape()[i+1][j] === '.'){
-                canFall = false;
-              }
-            }
-          }
-        }
-      }
-    return canFall;
   }
 
   toString() {
