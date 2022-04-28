@@ -38,23 +38,29 @@ export class Board {
   }
 
   rotateBlockLeft() {
-    if (this.canRotate('left')) {
+    if (this.canRotate("left")) {
       this.eraseBlock();
       this.falling.block = this.falling.block.rotateLeft();
     }
   }
 
-  checkTurningSpace(direction){
+  checkTurningSpace(direction, edge) {
     let testBlock, testX;
-    switch(direction){
-      case 'left':
+    switch (direction) {
+      case "left":
         testBlock = this.falling.block.rotateLeft();
+        break;
+      case "right":
+        testBlock = this.falling.block.rotateRight();
+    }
+    switch (edge) {
+      case "leftEdge":
         testX = 0;
         break;
-      case 'right':
-        testBlock = this.falling.block.rotateRight();
+      case "rightEdge":
         testX = this.falling.x - 1;
     }
+
     for (let i = 0; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
@@ -67,19 +73,23 @@ export class Board {
       }
     }
     this.falling.x = testX;
-    return true;       
+    return true;
   }
 
   canRotate(direction) {
     if (!this.falling.block.rotatable()) return;
-    if (direction === 'left' && this.falling.x < 0) this.checkTurningSpace(direction)
-    else if (direction === 'right' && this.falling.x + this.falling.block.getSize() > this.board[0].length) this.checkTurningSpace(direction)
+    if (this.falling.x < 0) this.checkTurningSpace(direction, "leftEdge");
+    else if (
+      this.falling.x + this.falling.block.getSize() >
+      this.board[0].length
+    )
+      this.checkTurningSpace(direction, "rightEdge");
     let testBlock;
-    switch(direction){
-      case 'left':
+    switch (direction) {
+      case "left":
         testBlock = this.falling.block.rotateLeft();
         break;
-      case 'right':
+      case "right":
         testBlock = this.falling.block.rotateRight();
     }
     for (let i = 0; i < testBlock.getSize(); i++) {
@@ -97,7 +107,7 @@ export class Board {
   }
 
   rotateBlockRight() {
-    if (this.canRotate('right')){
+    if (this.canRotate("right")) {
       this.eraseBlock();
       this.falling.block = this.falling.block.rotateRight();
     }

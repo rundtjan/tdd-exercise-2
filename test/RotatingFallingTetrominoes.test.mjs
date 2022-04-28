@@ -199,7 +199,21 @@ describe("Rotating falling tetrominoes", () => {
     board.rotateBlockRight();
     move(board, 'right', 5);
     board.rotateBlockRight();
-    console.log(board.toString())
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ......IIII
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  it("a tetromino at right edge cannot rotate if there is no room to the left", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateBlockRight();
+    move(board, 'right', 5);
+    board.rotateBlockRight();
     expect(board.toString()).to.equalShape(
       `..........
        ..........
