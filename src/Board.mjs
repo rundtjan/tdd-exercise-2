@@ -38,30 +38,21 @@ export class Board {
   }
 
   rotateBlockLeft() {
-    if (this.canRotateLeft()) {
+    if (this.canRotate('left')) {
       this.eraseBlock();
       this.falling.block = this.falling.block.rotateLeft();
     }
   }
 
-  canRotateLeft() {
-    let testBlock = this.falling.block.rotateLeft();
-    for (let i = 0; i < testBlock.getSize(); i++) {
-      for (let j = 0; j < testBlock.getSize(); j++) {
-        if (
-          testBlock.getShape()[i][j] != "." &&
-          this.board[this.falling.y + i][this.falling.x + j] != "." &&
-          this.falling.block.getShape()[i][j] === "."
-        ) {
-          return false;
-        }
-      }
+  canRotate(direction) {
+    let testBlock;
+    switch(direction){
+      case 'left':
+        testBlock = this.falling.block.rotateLeft();
+        break;
+      case 'right':
+        testBlock = this.falling.block.rotateRight();
     }
-    return true;
-  }
-
-  canRotateRight() {
-    let testBlock = this.falling.block.rotateRight();
     for (let i = 0; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
@@ -77,7 +68,7 @@ export class Board {
   }
 
   rotateBlockRight() {
-    if (this.canRotateRight()){
+    if (this.canRotate('right')){
       this.eraseBlock();
       this.falling.block = this.falling.block.rotateRight();
     }
