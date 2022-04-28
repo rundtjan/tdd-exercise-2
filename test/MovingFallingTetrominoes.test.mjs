@@ -88,10 +88,14 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  xit("stop when they hit the bottom", () => {
+  it("it cannot be moved down beyond the board (will stop falling)", () => {
     board.drop(Tetromino.T_SHAPE);
-    fallToBottom(board);
-
+    board.moveBlock('down')
+    board.moveBlock('down')
+    board.moveBlock('down')
+    board.moveBlock('down')
+    board.moveBlock('down')
+    board.moveBlock('down')
     expect(board.toString()).to.equalShape(
       `..........
        ..........
@@ -102,19 +106,4 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  xit("stop when they land on another block", () => {
-    board.drop(Tetromino.T_SHAPE);
-    fallToBottom(board);
-    board.drop(Tetromino.T_SHAPE);
-    fallToBottom(board);
-
-    expect(board.toString()).to.equalShape(
-      `..........
-       ..........
-       ....T.....
-       ...TTT....
-       ....T.....
-       ...TTT....`
-    );
-  });
 });

@@ -47,24 +47,9 @@ export class Board {
         if (this.falling.x + this.falling.block.getSize() < this.board[0].length) this.falling.x++;
         break;
       case 'down':
-        this.falling.y++;
+        if (this.blockCanFall()) this.falling.y++;
         break;
     }
-  }
-
-  moveFallingLeft(){
-    this.eraseBlock();
-    this.falling.x--;
-  }
-
-  moveFallingRight(){
-    this.eraseBlock();
-    this.falling.x++;
-  }
-
-  moveFallingDown(){
-    this.eraseBlock();
-    this.falling.y++;
   }
 
   drawOnBoard() {
