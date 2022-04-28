@@ -47,6 +47,11 @@ export class Board {
     this.falling.x++;
   }
 
+  moveFallingDown(){
+    this.eraseBlock();
+    this.falling.y++;
+  }
+
   drawOnBoard() {
     if (this.falling) {
       if (this.falling.block.getSize() === 1) {

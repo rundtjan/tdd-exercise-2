@@ -41,6 +41,19 @@ describe("Falling tetrominoes", () => {
     );
   });
 
+  it("a falling tetromino can be moved down", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveFallingDown()
+    expect(board.toString()).to.equalShape(
+      `..........
+       ....T.....
+       ...TTT....
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
   xit("stop when they hit the bottom", () => {
     board.drop(Tetromino.T_SHAPE);
     fallToBottom(board);
