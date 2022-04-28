@@ -45,14 +45,7 @@ export class Board {
   }
 
   checkTurningSpace(direction, edge) {
-    let testBlock, testX;
-    switch (direction) {
-      case "left":
-        testBlock = this.falling.block.rotateLeft();
-        break;
-      case "right":
-        testBlock = this.falling.block.rotateRight();
-    }
+    let testX;
     switch (edge) {
       case "leftEdge":
         testX = 0;
@@ -60,17 +53,26 @@ export class Board {
       case "rightEdge":
         testX = this.falling.x - 1;
     }
-    return this.newPositionOk(testBlock, testX);
+   if (this.newPositionOk(direction, testX)){
+     this.falling.x = testX;
+     return true;
+   } else {
+     return false;
+   };
   }
 
   canRotate(direction) {
     if (!this.falling.block.rotatable()) return;
-    if (this.falling.x < 0) this.checkTurningSpace(direction, "leftEdge");
+    if (this.falling.x < 0) return this.checkTurningSpace(direction, "leftEdge");
     else if (
       this.falling.x + this.falling.block.getSize() >
       this.board[0].length
     )
-      this.checkTurningSpace(direction, "rightEdge");
+      return this.checkTurningSpace(direction, "rightEdge");
+    return this.newPositionOk(direction, this.falling.x);
+  }
+
+  newPositionOk(direction, testX){
     let testBlock;
     switch (direction) {
       case "left":
@@ -79,21 +81,6 @@ export class Board {
       case "right":
         testBlock = this.falling.block.rotateRight();
     }
-    for (let i = 0; i < testBlock.getSize(); i++) {
-      for (let j = 0; j < testBlock.getSize(); j++) {
-        if (
-          testBlock.getShape()[i][j] != "." &&
-          this.board[this.falling.y + i][this.falling.x + j] != "." &&
-          this.falling.block.getShape()[i][j] === "."
-        ) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  newPositionOk(testBlock, testX){
     for (let i = 0; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
