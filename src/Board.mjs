@@ -16,19 +16,6 @@ export class Board {
     }
     this.middle = width % 2 === 0 ? width / 2 - 1 : Math.floor(width / 2);
     this.falling = false;
-    this.fallingBlock = 0;
-  }
-
-  drop2(block) {
-    if (this.falling) throw "already falling";
-    else block.setNumber(this.fallingBlock);
-    let start =
-      block.getSize() === 1
-        ? this.middle
-        : this.middle - Math.floor(block.getSize() / 2);
-    this.drawOnBoard(block, start);
-    let [y, x] = [0, start];
-    this.falling = { block, y, x };
   }
 
   drop(block) {
