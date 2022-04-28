@@ -121,6 +121,26 @@ describe("Rotating falling tetrominoes", () => {
     );
   });
 
+  it("a tetromino cannot be rotated left if blocked by other block", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockRight();
+    move(board, 'left', 2);
+    move(board, 'down', 4);
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockRight();
+    move(board, 'down', 3);
+    board.rotateBlockLeft()
+    console.log(board.toString())
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..T.T.....
+       ..TTTT....
+       ..T.T.....`
+    );
+  });
+
   xit("a falling tetromino can be moved right", () => {
     board.drop(Tetromino.T_SHAPE);
     board.moveBlock("right");

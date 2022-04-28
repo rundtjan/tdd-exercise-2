@@ -68,14 +68,11 @@ export class Board {
   }
 
   canMoveRight(){
-    console.log('can move right getting called')
-    //if (this.falling.x + this.falling.block.getSize() >= this.board[0].length) return false
     for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
-        //if (this.falling.block.getShape()[i][j] != '.') return false; 
         if (this.falling.block.getShape()[i][j] != '.' && this.board[this.falling.y + i][this.falling.x + j+1] != '.'){
-          if (j === this.falling.block.getSize()-1) {console.log('j was size'); return false;}
-          else if (this.falling.block.getShape()[i][j+1] === '.') {console.log('it was the shape'); return false;}
+          if (j === this.falling.block.getSize()-1) return false;
+          else if (this.falling.block.getShape()[i][j+1] === '.') return false;
         }
       }
     }
