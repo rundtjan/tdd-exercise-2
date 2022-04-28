@@ -28,18 +28,6 @@ export class Board {
     this.falling = { block, y, x };
   }
 
-  drawOnBoard(block, start) {
-    if (block.getSize() === 1) {
-      this.board[0][start] = block;
-    } else {
-      for (var i = 0; i < block.getSize(); i++) {
-        for (var j = 0; j < block.getSize(); j++) {
-          this.board[0 + i][start + j] = block.getShape()[i][j];
-        }
-      }
-    }
-  }
-
   eraseBlock() {
     if (this.falling.block.getSize() === 1)
       this.board[this.falling.y][this.falling.x] = ".";
@@ -53,7 +41,7 @@ export class Board {
     }
   }
 
-  drawOnBoard2(image) {
+  drawOnBoard(image) {
     if (this.falling) {
       if (this.falling.block.getSize() === 1) {
         image[this.falling.y][this.falling.x] = this.falling.block.toString();
@@ -79,7 +67,7 @@ export class Board {
       this.eraseBlock();
       this.falling.y++;
     } else {
-      this.board = this.drawOnBoard2(this.board)
+      this.board = this.drawOnBoard(this.board)
       this.falling = false;
     }
   }
@@ -139,7 +127,7 @@ export class Board {
 
   toString() {
     let image = this.board.slice();
-    image = this.drawOnBoard2(image);
+    image = this.drawOnBoard(image);
     var output = "";
     this.board.forEach((elem) => {
       elem.forEach((elemint) => {
