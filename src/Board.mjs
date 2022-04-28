@@ -38,6 +38,7 @@ export class Board {
   }
 
   moveBlock(direction){
+    if (!this.falling) return;
     this.eraseBlock()
     switch(direction){
       case 'left':
@@ -48,6 +49,10 @@ export class Board {
         break;
       case 'down':
         if (this.blockCanFall()) this.falling.y++;
+        else {
+          this.drawOnBoard();
+          this.falling = false;
+        }
         break;
     }
   }

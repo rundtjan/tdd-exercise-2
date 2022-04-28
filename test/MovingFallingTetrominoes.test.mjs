@@ -104,6 +104,10 @@ describe("Falling tetrominoes", () => {
        ....T.....
        ...TTT....`
     );
+    expect(
+      board.hasFalling(),
+      "the block has stopped falling"
+    ).to.be.false;
   });
 
 });
