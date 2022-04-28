@@ -44,7 +44,7 @@ export class Board {
         if (this.falling.x > 0) this.falling.x--;
         break;
       case 'right':
-        this.falling.x++;
+        if (this.falling.x + this.falling.block.getSize() < this.board[0].length) this.falling.x++;
         break;
       case 'down':
         this.falling.y++;
