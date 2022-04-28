@@ -37,6 +37,21 @@ export class Board {
     }
   }
 
+  moveBlock(direction){
+    this.eraseBlock()
+    switch(direction){
+      case 'left':
+        this.falling.x--;
+        break;
+      case 'right':
+        this.falling.x++;
+        break;
+      case 'down':
+        this.falling.y++;
+        break;
+    }
+  }
+
   moveFallingLeft(){
     this.eraseBlock();
     this.falling.x--;
