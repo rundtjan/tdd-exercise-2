@@ -46,7 +46,22 @@ export class Board {
 
   canRotateLeft() {
     let testBlock = this.falling.block.rotateLeft();
-    console.log(this.falling.block.getShape(), testBlock.getShape());
+    for (let i = 0; i < testBlock.getSize(); i++) {
+      for (let j = 0; j < testBlock.getSize(); j++) {
+        if (
+          testBlock.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][this.falling.x + j] != "." &&
+          this.falling.block.getShape()[i][j] === "."
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  canRotateRight() {
+    let testBlock = this.falling.block.rotateRight();
     for (let i = 0; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
@@ -62,8 +77,10 @@ export class Board {
   }
 
   rotateBlockRight() {
-    this.eraseBlock();
-    this.falling.block = this.falling.block.rotateRight();
+    if (this.canRotateRight()){
+      this.eraseBlock();
+      this.falling.block = this.falling.block.rotateRight();
+    }
   }
 
   moveBlock(direction) {
