@@ -41,7 +41,7 @@ export class Board {
     this.eraseBlock()
     switch(direction){
       case 'left':
-        this.falling.x--;
+        if (this.falling.x > 0) this.falling.x--;
         break;
       case 'right':
         this.falling.x++;
