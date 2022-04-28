@@ -9,7 +9,7 @@ function fallToBottom(board) {
   }
 }
 
-describe("Falling tetrominoes", () => {
+describe("Moving falling tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -110,4 +110,30 @@ describe("Falling tetrominoes", () => {
     ).to.be.false;
   });
 
+  it("it cannot be moved left through other blocks (developing test)", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveBlock('left');
+    board.moveBlock('left');
+    board.moveBlock('left');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.drop(Tetromino.T_SHAPE);
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('down');
+    board.moveBlock('left');
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       .T..T.....
+       TTTTTT....`
+    );
+  });
 });
