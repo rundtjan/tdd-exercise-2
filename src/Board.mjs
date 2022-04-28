@@ -163,7 +163,6 @@ export class Board {
       });
       output += "\n";
     });
-    console.log(output);
     return output;
   }
 }
