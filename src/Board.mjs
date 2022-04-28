@@ -17,7 +17,6 @@ export class Board {
     this.middle = width % 2 === 0 ? width / 2 - 1 : Math.floor(width / 2);
     this.falling = false;
     this.fallingBlock = 0;
-    this.fallingPosition;
   }
 
   drop2(block) {
@@ -34,7 +33,6 @@ export class Board {
 
   drop(block) {
     if (this.falling) throw "already falling";
-    else block.setNumber(this.fallingBlock);
     let start =
       block.getSize() === 1
         ? this.middle
