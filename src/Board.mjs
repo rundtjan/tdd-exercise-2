@@ -45,7 +45,7 @@ export class Board {
         if (this.canMoveLeft()) this.falling.x--;
         break;
       case 'right':
-        if (this.falling.x + this.falling.block.getSize() < this.board[0].length && this.canMoveRight()) this.falling.x++;
+        if (this.canMoveRight()) this.falling.x++;
         break;
       case 'down':
         if (this.canMoveDown()) this.falling.y++;
@@ -58,6 +58,7 @@ export class Board {
   }
 
   canMoveRight(){
+    if (this.falling.x + this.falling.block.getSize() >= this.board[0].length) return false
     for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
         if (this.falling.block.getShape()[i][j] != '.' && this.board[this.falling.y + i][this.falling.x + j+1] != '.'){
