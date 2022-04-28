@@ -38,10 +38,12 @@ export class Board {
   }
 
   rotateBlockLeft(){
+    this.eraseBlock();
     this.falling.block = this.falling.block.rotateLeft();
   }
 
   rotateBlockRight(){
+    this.eraseBlock();
     this.falling.block = this.falling.block.rotateRight();
   }
 
