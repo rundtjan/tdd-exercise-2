@@ -37,6 +37,11 @@ export class Board {
     }
   }
 
+  moveFallingLeft(){
+    this.eraseBlock();
+    this.falling.x--;
+  }
+
   drawOnBoard() {
     if (this.falling) {
       if (this.falling.block.getSize() === 1) {
@@ -63,7 +68,7 @@ export class Board {
       this.eraseBlock();
       this.falling.y++;
     } else {
-      this.drawOnBoard(this.board)
+      this.drawOnBoard()
       this.falling = false;
     }
   }
