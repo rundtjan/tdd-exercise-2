@@ -92,18 +92,6 @@ export class Board {
     return canFall;
   }
 
-  toString2() {
-    var output = "";
-    this.board.forEach((elem) => {
-      elem.forEach((elemint) => {
-        if (elemint === ".") output += elemint;
-        else output += elemint.toString();
-      });
-      output += "\n";
-    });
-    return output;
-  }
-
   toString() {
     let image = this.board.slice();
     image = this.drawOnBoard(image);
