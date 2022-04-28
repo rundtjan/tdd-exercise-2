@@ -37,27 +37,46 @@ export class Board {
     }
   }
 
-  rotateBlockLeft(){
-    this.eraseBlock();
-    this.falling.block = this.falling.block.rotateLeft();
+  rotateBlockLeft() {
+    if (this.canRotateLeft()) {
+      this.eraseBlock();
+      this.falling.block = this.falling.block.rotateLeft();
+    }
   }
 
-  rotateBlockRight(){
+  canRotateLeft() {
+    let testBlock = this.falling.block.rotateLeft();
+    console.log(this.falling.block.getShape(), testBlock.getShape());
+    for (let i = 0; i < testBlock.getSize(); i++) {
+      for (let j = 0; j < testBlock.getSize(); j++) {
+        if (
+          testBlock.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][this.falling.x + j] != "." &&
+          this.falling.block.getShape()[i][j] === "."
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  rotateBlockRight() {
     this.eraseBlock();
     this.falling.block = this.falling.block.rotateRight();
   }
 
-  moveBlock(direction){
+  moveBlock(direction) {
     if (!this.falling) return;
-    this.eraseBlock()
-    switch(direction){
-      case 'left':
+    this.eraseBlock();
+    switch (direction) {
+      case "left":
         if (this.canMoveLeft()) this.falling.x--;
         break;
-      case 'right':
+      case "right":
         if (this.canMoveRight()) this.falling.x++;
         break;
-      case 'down':
+      case "down":
         if (this.canMoveDown()) this.falling.y++;
         else {
           this.drawOnBoard();
@@ -67,25 +86,37 @@ export class Board {
     }
   }
 
-  canMoveRight(){
+  canMoveRight() {
     for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
-        if (this.falling.block.getShape()[i][j] != '.' && this.board[this.falling.y + i][this.falling.x + j+1] != '.'){
-          if (j === this.falling.block.getSize()-1) return false;
-          else if (this.falling.block.getShape()[i][j+1] === '.') return false;
+        if (
+          this.falling.block.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][this.falling.x + j + 1] != "."
+        ) {
+          if (j === this.falling.block.getSize() - 1) return false;
+          else if (this.falling.block.getShape()[i][j + 1] === ".")
+            return false;
         }
       }
     }
     return true;
   }
 
-  canMoveLeft(){
+  canMoveLeft() {
     for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
-        if (this.falling.block.getShape()[i][j] != '.' && this.falling + j === 0) return false;
-        else if (this.falling.block.getShape()[i][j] != '.' && this.board[this.falling.y + i][this.falling.x + j-1] != '.'){
+        if (
+          this.falling.block.getShape()[i][j] != "." &&
+          this.falling + j === 0
+        )
+          return false;
+        else if (
+          this.falling.block.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][this.falling.x + j - 1] != "."
+        ) {
           if (j === 0) return false;
-          else if (this.falling.block.getShape()[i][j-1] === '.') return false;
+          else if (this.falling.block.getShape()[i][j - 1] === ".")
+            return false;
         }
       }
     }
@@ -98,23 +129,26 @@ export class Board {
         if (this.falling.block.getShape()[i][j] != ".") {
           if (this.falling.y + i === this.board.length - 1) {
             return false;
-            } else if (this.board[this.falling.y + i + 1][this.falling.x + j] != "."){
-              if (i === this.falling.block.getSize() - 1) {
-                return false;
-              } else if (this.falling.block.getShape()[i+1][j] === '.'){
-                return false;
-              }
+          } else if (
+            this.board[this.falling.y + i + 1][this.falling.x + j] != "."
+          ) {
+            if (i === this.falling.block.getSize() - 1) {
+              return false;
+            } else if (this.falling.block.getShape()[i + 1][j] === ".") {
+              return false;
             }
           }
         }
       }
+    }
     return true;
   }
 
   drawOnBoard() {
     if (this.falling) {
       if (this.falling.block.getSize() === 1) {
-        this.board[this.falling.y][this.falling.x] = this.falling.block.toString();
+        this.board[this.falling.y][this.falling.x] =
+          this.falling.block.toString();
       } else {
         for (var i = 0; i < this.falling.block.getSize(); i++) {
           for (var j = 0; j < this.falling.block.getSize(); j++) {
@@ -137,7 +171,7 @@ export class Board {
       this.eraseBlock();
       this.falling.y++;
     } else {
-      this.drawOnBoard()
+      this.drawOnBoard();
       this.falling = false;
     }
   }
