@@ -94,6 +94,7 @@ export class Board {
       this.eraseBlock();
       this.falling.y++;
     } else {
+      this.board = this.drawOnBoard2(this.board)
       this.falling = false;
     }
   }
@@ -106,9 +107,6 @@ export class Board {
           if (this.falling.y + i === this.board.length - 1) {
             canFall = false;
             } else if (this.board[this.falling.y + i + 1][this.falling.x + j] != "."){
-              console.log('notices that something is there')
-              console.log(i === this.falling.block.getSize() - 1, i)
-              console.log(this.falling.block.getShape()[i])
               if (i === this.falling.block.getSize() - 1) {
                 canFall = false;
               } else if (this.falling.block.getShape()[i+1][j] === '.'){

@@ -5,7 +5,6 @@ import { Tetromino } from "../src/Tetromino.mjs";
 
 function fallToBottom(board) {
   for (let i = 0; i < 10; i++) {
-    board.toString()
     board.tick();
   }
 }
@@ -72,4 +71,3 @@ describe("Falling tetrominoes", () => {
     );
   });
 });
-
