@@ -48,7 +48,7 @@ export class Board {
         if (this.falling.x + this.falling.block.getSize() < this.board[0].length && this.canMoveRight()) this.falling.x++;
         break;
       case 'down':
-        if (this.blockCanFall()) this.falling.y++;
+        if (this.canMoveDown()) this.falling.y++;
         else {
           this.drawOnBoard();
           this.falling = false;
@@ -82,7 +82,7 @@ export class Board {
     return true;
   }
 
-  blockCanFall() {
+  canMoveDown() {
     for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
         if (this.falling.block.getShape()[i][j] != ".") {
@@ -123,7 +123,7 @@ export class Board {
   }
 
   tick() {
-    if (this.falling && this.blockCanFall()) {
+    if (this.falling && this.canMoveDown()) {
       this.eraseBlock();
       this.falling.y++;
     } else {
