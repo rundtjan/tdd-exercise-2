@@ -55,17 +55,18 @@ export class Board {
     }
   }
 
-  eraseBlock(){
-    if (this.falling.block.getSize() === 1) this.board[this.falling.y][this.falling.x] = '.';
+  eraseBlock() {
+    if (this.falling.block.getSize() === 1)
+      this.board[this.falling.y][this.falling.x] = ".";
     else {
       for (var i = 0; i < this.falling.block.getSize(); i++) {
         for (var j = 0; j < this.falling.block.getSize(); j++) {
           if (this.falling.block.getShape()[i][j] != ".")
-            this.board[this.falling.y + i][this.falling.x + j] = '.';
+            this.board[this.falling.y + i][this.falling.x + j] = ".";
         }
-      }      
+      }
     }
-  } 
+  }
 
   drawOnBoard2(image) {
     if (this.falling) {
@@ -89,25 +90,34 @@ export class Board {
   }
 
   tick() {
-    if (this.falling && this.blockCanFall()){
-      this.eraseBlock()
+    if (this.falling && this.blockCanFall()) {
+      this.eraseBlock();
       this.falling.y++;
     } else {
       this.falling = false;
     }
   }
 
-  blockCanFall(){
+  blockCanFall() {
     let canFall = true;
-    for (let i = this.falling.block.getSize()-1; i >= 0; i--){
-      for (let j = 0; j < this.falling.block.getSize(); j++){
-        if (this.falling.block.getShape()[i][j] != '.'){
-          if (this.falling.y + i === this.board.length-1){
+    for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
+      for (let j = 0; j < this.falling.block.getSize(); j++) {
+        if (this.falling.block.getShape()[i][j] != ".") {
+          if (this.falling.y + i === this.board.length - 1) {
             canFall = false;
+            } else if (this.board[this.falling.y + i + 1][this.falling.x + j] != "."){
+              console.log('notices that something is there')
+              console.log(i === this.falling.block.getSize() - 1, i)
+              console.log(this.falling.block.getShape()[i])
+              if (i === this.falling.block.getSize() - 1) {
+                canFall = false;
+              } else if (this.falling.block.getShape()[i+1][j] === '.'){
+                canFall = false;
+              }
+            }
           }
         }
       }
-    }
     return canFall;
   }
 
@@ -155,7 +165,7 @@ export class Board {
       });
       output += "\n";
     });
-    console.log(output)
+    console.log(output);
     return output;
   }
 }
