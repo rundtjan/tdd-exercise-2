@@ -82,12 +82,7 @@ describe("Moving falling tetrominoes", () => {
 
   it("it cannot be moved down beyond the board (will stop falling)", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.moveBlock('down')
-    board.moveBlock('down')
-    board.moveBlock('down')
-    board.moveBlock('down')
-    board.moveBlock('down')
-    board.moveBlock('down')
+    move(board, 'down', 6)
     expect(board.toString()).to.equalShape(
       `..........
        ..........
@@ -102,30 +97,40 @@ describe("Moving falling tetrominoes", () => {
     ).to.be.false;
   });
 
-  xit("it cannot be moved left through other blocks (developing test)", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.moveBlock('left');
-    board.moveBlock('left');
-    board.moveBlock('left');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.drop(Tetromino.T_SHAPE);
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('down');
-    board.moveBlock('left');
-    expect(board.toString()).to.equalShape(
-      `..........
-       ..........
-       ..........
-       ..........
-       .T..T.....
-       TTTTTT....`
-    );
-  });
+  describe("it cannot be moved left through other blocks", () => {
+    it("it detects objects on the outer limit of the block", () => {
+      board.drop(Tetromino.T_SHAPE);
+      move(board, 'left', 3)
+      move(board, 'down', 6)
+      board.drop(Tetromino.T_SHAPE);
+      move(board, 'down', 4)
+      board.moveBlock('left');
+      expect(board.toString()).to.equalShape(
+        `..........
+         ..........
+         ..........
+         ..........
+         .T..T.....
+         TTTTTT....`
+      );
+    });
+
+    it("it detects objects with inner structures of the block (developing)", () => {
+      board.drop(Tetromino.T_SHAPE);
+      move(board, 'left', 3)
+      move(board, 'down', 6)
+      board.drop(Tetromino.T_SHAPE);
+      move(board, 'left', 3)
+      move(board, 'down', 3)
+      expect(board.toString()).to.equalShape(
+        `..........
+         ..........
+         .T........
+         TTT.......
+         .T........
+         TTT.......`
+      );
+    });
+  })
+
 });

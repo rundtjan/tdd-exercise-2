@@ -42,7 +42,7 @@ export class Board {
     this.eraseBlock()
     switch(direction){
       case 'left':
-        if (this.falling.x > 0) this.falling.x--;
+        if (this.falling.x > 0 && this.canMoveLeft()) this.falling.x--;
         break;
       case 'right':
         if (this.falling.x + this.falling.block.getSize() < this.board[0].length) this.falling.x++;
@@ -55,6 +55,17 @@ export class Board {
         }
         break;
     }
+  }
+
+  canMoveLeft(){
+    for (let i = this.falling.block.getSize() - 1; i >= 0; i--) {
+      for (let j = 0; j < this.falling.block.getSize(); j++) {
+        if (this.falling.block.getShape()[i][j] != "." && this.board[this.falling.y + i][this.falling.x + j-1] != '.'){
+          if (j === 0) return false
+        }
+      }
+    }
+    return true;
   }
 
   drawOnBoard() {
