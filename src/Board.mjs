@@ -3,8 +3,6 @@ export class Board {
   height;
 
   constructor(width, height) {
-    this.width = width;
-    this.height = height;
     this.board = new Array(height);
     for (var i = 0; i < this.board.length; i++) {
       this.board[i] = new Array(width);
