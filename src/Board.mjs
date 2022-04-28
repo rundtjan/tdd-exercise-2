@@ -65,7 +65,7 @@ export class Board {
       this.eraseBlock();
       this.falling.y++;
     } else {
-      this.board = this.drawOnBoard(this.board)
+      this.drawOnBoard(this.board)
       this.falling = false;
     }
   }
