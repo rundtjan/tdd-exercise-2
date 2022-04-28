@@ -91,8 +91,7 @@ export class Board {
   }
 
   toString() {
-    let image = this.board.slice();
-    image = this.drawOnBoard(image);
+    this.drawOnBoard();
     var output = "";
     this.board.forEach((elem) => {
       elem.forEach((elemint) => {
