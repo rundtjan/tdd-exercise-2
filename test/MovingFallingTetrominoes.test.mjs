@@ -134,7 +134,7 @@ describe("Moving falling tetrominoes", () => {
     });
 
     describe("it cannot be moved right through other blocks", () => {
-      xit("it detects objects on the outer right limit of the block", () => {
+      it("it detects objects on the outer right limit of the block", () => {
         board.drop(Tetromino.T_SHAPE);
         move(board, "right", 3);
         move(board, "down", 6);
