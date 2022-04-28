@@ -39,10 +39,10 @@ export class Board {
     }
   }
 
-  drawOnBoard(image) {
+  drawOnBoard() {
     if (this.falling) {
       if (this.falling.block.getSize() === 1) {
-        image[this.falling.y][this.falling.x] = this.falling.block.toString();
+        this.board[this.falling.y][this.falling.x] = this.falling.block.toString();
       } else {
         for (var i = 0; i < this.falling.block.getSize(); i++) {
           for (var j = 0; j < this.falling.block.getSize(); j++) {
@@ -53,7 +53,7 @@ export class Board {
         }
       }
     }
-    return image;
+    return this.board;
   }
 
   hasFalling() {
