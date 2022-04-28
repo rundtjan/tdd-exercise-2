@@ -41,6 +41,20 @@ describe("Rotating falling tetrominoes", () => {
     );
   });
 
+  it("a rotated tetromino stops correctly at the bottom", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockRight();
+    move(board, 'down', 4);
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ....T.....
+       ....TT....
+       ....T.....`
+    );
+  });
+
   xit("a falling tetromino can be moved right", () => {
     board.drop(Tetromino.T_SHAPE);
     board.moveBlock("right");
