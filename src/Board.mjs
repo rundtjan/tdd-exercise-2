@@ -45,6 +45,7 @@ export class Board {
   }
 
   checkTurningSpace(direction, edge) {
+    console.log('gets called with ', direction, edge)
     let testX;
     switch (edge) {
       case "leftEdge":
@@ -81,12 +82,12 @@ export class Board {
       case "right":
         testBlock = this.falling.block.rotateRight();
     }
+    this.eraseBlock()
     for (let i = 0; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
           testBlock.getShape()[i][j] != "." &&
-          this.board[this.falling.y + i][testX + j] != "." &&
-          this.falling.block.getShape()[i][j] === "."
+          this.board[this.falling.y + i][testX + j] != "."
         ) {
           return false;
         }

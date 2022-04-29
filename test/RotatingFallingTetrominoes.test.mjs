@@ -210,17 +210,23 @@ describe("Rotating falling tetrominoes", () => {
   });
 
   it("a tetromino at right edge cannot rotate if there is no room to the left", () => {
-    board.drop(Tetromino.I_SHAPE);
-    board.rotateBlockRight();
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockLeft();
+    move(board, 'right', 3);
+    move(board, 'down', 4);
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockLeft();
     move(board, 'right', 5);
-    board.rotateBlockRight();
+    move(board, 'down', 3);
+    board.rotateBlockLeft();
+    console.log(board.toString())
     expect(board.toString()).to.equalShape(
       `..........
        ..........
-       ......IIII
        ..........
-       ..........
-       ..........`
+       .......T.T
+       ......TTTT
+       .......T.T`
     );
   });
 });
