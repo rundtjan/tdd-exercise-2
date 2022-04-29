@@ -29,7 +29,9 @@ export class Board {
     if (this.falling.block.getSize() === 1)
       this.board[this.falling.y][this.falling.x] = ".";
     else {
-      for (var i = 0; i < this.falling.block.getSize(); i++) {
+      let start;
+      this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
+      for (var i = start; i < this.falling.block.getSize(); i++) {
         for (var j = 0; j < this.falling.block.getSize(); j++) {
           if (this.falling.block.getShape()[i][j] != ".")
             this.board[this.falling.y + i][this.falling.x + j] = ".";
