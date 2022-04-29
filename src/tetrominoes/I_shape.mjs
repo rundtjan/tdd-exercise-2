@@ -41,16 +41,16 @@ export class I_shape {
   }
 
   rotateRight() {
-    this.rotate()
+    return this.rotate()
   }
 
   rotate() {
-    this.direction === 0 ? this.direction = 1 : this.direction = 0;
-    return new I_shape(this.direction);
+    if (this.direction === 0) return new I_shape(1);
+    else return new I_shape(0);
   }
 
   rotateLeft() {
-    this.rotate()
+    return this.rotate()
   }
 
   toString() {
