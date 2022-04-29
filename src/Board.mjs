@@ -21,6 +21,7 @@ export class Board {
         ? this.middle
         : this.middle - Math.floor(block.getSize() / 2);
     let [y, x] = [0, start];
+    if (block.getStartRow) y -= block.getStartRow();
     this.falling = { block, y, x };
   }
 
@@ -188,7 +189,9 @@ export class Board {
         this.board[this.falling.y][this.falling.x] =
           this.falling.block.toString();
       } else {
-        for (var i = 0; i < this.falling.block.getSize(); i++) {
+        let start;
+        this.falling.block.getStartRow ? start = this.falling.block.getStartRow() : start = 0;
+        for (var i = start; i < this.falling.block.getSize(); i++) {
           for (var j = 0; j < this.falling.block.getSize(); j++) {
             if (this.falling.block.getShape()[i][j] != ".")
               this.board[this.falling.y + i][this.falling.x + j] =
