@@ -190,7 +190,7 @@ export class Board {
           this.falling.block.toString();
       } else {
         let start;
-        this.falling.block.getStartRow ? start = this.falling.block.getStartRow() : start = 0;
+        this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
         for (var i = start; i < this.falling.block.getSize(); i++) {
           for (var j = 0; j < this.falling.block.getSize(); j++) {
             if (this.falling.block.getShape()[i][j] != ".")
