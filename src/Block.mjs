@@ -1,10 +1,10 @@
-import { RotatingShape } from "../src/RotatingShape.mjs";
+import { Block_shape } from "../src/tetrominoes/Block_shape.mjs"
 
 export class Block {
   color;
 
   constructor(symbol) {
-    return new RotatingShape(symbol);
+    return new Block_shape(symbol);
   }
 
 }

@@ -2,7 +2,7 @@ export class Block_shape {
 
   constructor(symbol) {
     this.shape = this.createShape(symbol);
-    this.direction = shape;
+    //this.direction = shape;
     this.rotates = this.rotatable();
   }
 
