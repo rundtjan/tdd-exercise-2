@@ -25,13 +25,17 @@ export class Board {
     this.falling = { block, y, x };
   }
 
+  getStartIndex(){
+    let start;
+    this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
+    return start;
+  }
+
   eraseBlock() {
     if (this.falling.block.getSize() === 1)
       this.board[this.falling.y][this.falling.x] = ".";
     else {
-      let start;
-      this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
-      for (var i = start; i < this.falling.block.getSize(); i++) {
+      for (var i = this.getStartIndex(); i < this.falling.block.getSize(); i++) {
         for (var j = 0; j < this.falling.block.getSize(); j++) {
           if (this.falling.block.getShape()[i][j] != ".")
             this.board[this.falling.y + i][this.falling.x + j] = ".";
@@ -86,9 +90,7 @@ export class Board {
         testBlock = this.falling.block.rotateRight();
     }
     this.eraseBlock()
-    let start;
-    this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
-    for (let i = start; i < testBlock.getSize(); i++) {
+    for (let i = this.getStartIndex(); i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
           testBlock.getShape()[i][j] != "." &&
@@ -193,9 +195,7 @@ export class Board {
         this.board[this.falling.y][this.falling.x] =
           this.falling.block.toString();
       } else {
-        let start;
-        this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
-        for (var i = start; i < this.falling.block.getSize(); i++) {
+        for (var i = this.getStartIndex(); i < this.falling.block.getSize(); i++) {
           for (var j = 0; j < this.falling.block.getSize(); j++) {
             if (this.falling.block.getShape()[i][j] != ".")
               this.board[this.falling.y + i][this.falling.x + j] =
