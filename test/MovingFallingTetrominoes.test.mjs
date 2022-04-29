@@ -172,17 +172,17 @@ describe("Moving falling tetrominoes", () => {
 
   describe("it cannot be moved down through other blocks (will stop falling)", () => {
     it("it detects objects on the outer limit of the block", () => {
-      board.drop(Tetromino.T_SHAPE);
+      board.drop(Tetromino.T_SHAPE2);
       move(board, "down", 5);
-      board.drop(Tetromino.T_SHAPE);
+      board.drop(Tetromino.T_SHAPE2);
       move(board, "down", 4);
       expect(board.toString()).to.equalShape(
         `..........
          ..........
-         ....T.....
          ...TTT....
          ....T.....
-         ...TTT....`
+         ...TTT....
+         ....T.....`
       );
     });
   });
