@@ -104,6 +104,38 @@ export class Board {
     return true;
   }
 
+  newPositionOk2(direction, testX){
+    let testBlock;
+    switch (direction) {
+      case "left":
+        testBlock = this.falling.block.rotateLeft();
+        break;
+      case "right":
+        testBlock = this.falling.block.rotateRight();
+        break;
+      case "same":
+        testBlock = this.falling.block;
+    }
+    console.log('hello', direction)
+    this.eraseBlock()
+    console.log('hello2', direction)
+    for (let i = this.getStartIndex(); i < testBlock.getSize(); i++) {
+      for (let j = 0; j < testBlock.getSize(); j++) {
+        if (
+          testBlock.getShape()[i][j] != "." &&
+          this.board[this.falling.y + i][testX + j] != "."
+        ) {
+          console.log('returns false', i, j)
+          return false;
+        }
+      }
+    }
+    console.log('hello3', direction, this.falling.x, testX)
+    this.falling.x = testX;
+    console.log('hello4', this.falling.x)
+    return true;
+  }
+
   rotateBlockRight() {
     if (this.canRotate("right")) {
       this.eraseBlock();
@@ -116,10 +148,11 @@ export class Board {
     this.eraseBlock();
     switch (direction) {
       case "left":
-        if (this.canMoveLeft()) this.falling.x--;
+        this.newPositionOk2('same', this.falling.x - 1);
         break;
       case "right":
-        if (this.canMoveRight()) this.falling.x++;
+        this.newPositionOk2('same', this.falling.x + 1);
+        //if (this.canMoveRight()) this.falling.x++;
         break;
       case "down":
         if (this.canMoveDown()) this.falling.y++;
