@@ -1,4 +1,5 @@
-export class T_shape {
+export class L_shape {
+
   constructor(shape = 0) {
     this.shape = this.createShape(shape);
     this.direction = shape;
@@ -17,7 +18,7 @@ export class T_shape {
     return 1;
   }
 
-  getShape() {
+  getShape(){
     return this.shape;
   }
 
@@ -25,28 +26,28 @@ export class T_shape {
     let shapes = [
       [
         [".", ".", "."],
-        ["T", "T", "T"],
-        [".", "T", "."],
+        ["L", "L", "L"],
+        ["L", ".", "."],
       ],
       [
-        [".", "T", "."],
-        ["T", "T", "."],
-        [".", "T", "."],
+        ["L", "L", "."],
+        [".", "L", "."],
+        [".", "L", "."],
       ],
       [
         [".", ".", "."],
-        [".", "T", "."],
-        ["T", "T", "T"],
+        [".", ".", "L"],
+        ["L", "L", "L"],
       ],
       [
-        [".", "T", "."],
-        [".", "T", "T"],
-        [".", "T", "."],
+        [".", "L", "."],
+        [".", "L", "."],
+        [".", "L", "L"],
       ],
     ];
     return shapes[shape];
   }
-
+  
   rotateRight() {
     this.direction++;
     if (this.direction > 3) this.direction = 0;
@@ -60,7 +61,6 @@ export class T_shape {
   }
 
   toString() {
-    if (this.shape.length === 1) return this.shape[0][0];
     var output = "";
     this.shape.forEach((elem) => {
       elem.forEach((elemint) => {
