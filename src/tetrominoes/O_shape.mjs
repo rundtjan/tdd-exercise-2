@@ -33,15 +33,11 @@ export class O_shape {
   }
   
   rotateRight() {
-    this.rotate()
-  }
-
-  rotate() {
     return this;
   }
 
   rotateLeft() {
-    this.rotate()
+    return this;
   }
 
   toString() {
