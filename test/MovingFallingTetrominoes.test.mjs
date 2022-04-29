@@ -112,24 +112,23 @@ describe("Moving falling tetrominoes", () => {
     });
 
     it("it detects objects with inner structures of the block", () => {
-      board.drop(Tetromino.T_SHAPE);
+      board.drop(Tetromino.T_SHAPE2);
       move(board, "left", 3);
       move(board, "down", 6);
-      board.drop(Tetromino.T_SHAPE);
+      board.drop(Tetromino.T_SHAPE2);
       move(board, "left", 2);
       move(board, "down", 3);
-      board.drop(Tetromino.T_SHAPE);
-      board.moveBlock("right");
-      move(board, "down", 3);
+      board.drop(Tetromino.T_SHAPE2);
+      move(board, "down", 2);
       move(board, "left", 2);
 
       expect(board.toString()).to.equalShape(
         `..........
-         ..........
-         ..T.......
+         ...TTT....
          .TTTT.....
-         .T.TTT....
-         TTT.......`
+         ..T.......
+         TTT.......
+         .T........`
       );
     });
   });
