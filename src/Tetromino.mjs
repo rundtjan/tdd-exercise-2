@@ -1,5 +1,6 @@
 import { RotatingShape } from "../src/RotatingShape.mjs";
-import { T_shape } from '../src/tetrominoes/T_shape.mjs'
+import { T_shape } from '../src/tetrominoes/T_shape.mjs';
+import { Z_shape } from '../src/tetrominoes/Z_shape.mjs';
 
 export class Tetromino {
 
@@ -10,5 +11,7 @@ export class Tetromino {
   static I_SHAPE = new RotatingShape('..........IIII...........')
 
   static O_SHAPE = new RotatingShape('.OO.OO...')
+
+  static Z_SHAPE = new Z_shape(0);
 
 }
