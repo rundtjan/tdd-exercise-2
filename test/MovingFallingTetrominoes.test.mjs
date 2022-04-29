@@ -80,25 +80,25 @@ describe("Moving falling tetrominoes", () => {
   });
 
   it("it cannot be moved down beyond the board (will stop falling)", () => {
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(Tetromino.J_SHAPE);
     move(board, "down", 6);
     expect(board.toString()).to.equalShape(
       `..........
        ..........
        ..........
        ..........
-       ....T.....
-       ...TTT....`
+       ...JJJ....
+       .....J....`
     );
     expect(board.hasFalling(), "the block has stopped falling").to.be.false;
   });
 
   describe("it cannot be moved left through other blocks", () => {
     it("it detects objects on the outer limit of the block", () => {
-      board.drop(Tetromino.T_SHAPE);
+      board.drop(Tetromino.J_SHAPE);
       move(board, "left", 3);
       move(board, "down", 6);
-      board.drop(Tetromino.T_SHAPE);
+      board.drop(Tetromino.J_SHAPE);
       move(board, "down", 4);
       board.moveBlock("left");
       expect(board.toString()).to.equalShape(
@@ -106,8 +106,8 @@ describe("Moving falling tetrominoes", () => {
          ..........
          ..........
          ..........
-         .T..T.....
-         TTTTTT....`
+         JJJJJJ....
+         ..J..J....`
       );
     });
 

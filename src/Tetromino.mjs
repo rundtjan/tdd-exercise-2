@@ -5,6 +5,7 @@ import { L_shape } from '../src/tetrominoes/L_shape.mjs';
 import { I_shape } from '../src/tetrominoes/I_shape.mjs';
 import { O_shape } from '../src/tetrominoes/O_shape.mjs';
 import { S_shape } from '../src/tetrominoes/S_shape.mjs';
+import { J_shape } from '../src/tetrominoes/J_shape.mjs';
 
 export class Tetromino {
 
@@ -25,5 +26,7 @@ export class Tetromino {
   static O_SHAPE2 = new O_shape(0);
 
   static S_SHAPE = new S_shape(0);
+
+  static J_SHAPE = new J_shape(0);
 
 }
