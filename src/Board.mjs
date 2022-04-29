@@ -84,7 +84,9 @@ export class Board {
         testBlock = this.falling.block.rotateRight();
     }
     this.eraseBlock()
-    for (let i = 0; i < testBlock.getSize(); i++) {
+    let start;
+    this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
+    for (let i = start; i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
           testBlock.getShape()[i][j] != "." &&
