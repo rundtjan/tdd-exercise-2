@@ -67,11 +67,11 @@ describe("Moving falling tetrominoes", () => {
   });
 
   it("it cannot be moved right beyond the board", () => {
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(Tetromino.S_SHAPE);
     move(board, "right", 5);
     expect(board.toString()).to.equalShape(
-      `........T.
-       .......TTT
+      `........SS
+       .......SS.
        ..........
        ..........
        ..........
