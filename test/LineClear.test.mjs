@@ -83,4 +83,27 @@ describe("Line clears", () => {
       IZTII.TTTL`
     );
   });
+
+  it("Nothing dissolves if no full lines", () => {
+    board.loadBoard(      
+      `..........
+      ..........
+      I.........
+      I.......LL
+      I.T....T.L
+      ITTT..TTTL`
+
+    )
+    board.drop(Tetromino.T_SHAPE);
+    move(board, 'down', 5)
+
+    expect(board.toString()).to.equalShape(
+     `..........
+      ..........
+      I.........
+      I.......LL
+      I.TTTT.T.L
+      ITTTT.TTTL`
+    );
+  });
 });
