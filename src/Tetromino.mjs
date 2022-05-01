@@ -9,7 +9,7 @@ import { J_shape } from '../src/tetrominoes/J_shape.mjs';
 
 export class Tetromino {
 
-  static T_SHAPE2 = new T_shape(0);
+  static T_SHAPE = new T_shape(0);
 
   static Z_SHAPE = new Z_shape(0);
 
