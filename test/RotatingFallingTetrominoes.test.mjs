@@ -142,21 +142,21 @@ describe("Rotating falling tetrominoes", () => {
   });
 
   it("a tetromino cannot be rotated right if blocked by other block", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.rotateBlockRight();
-    move(board, 'right', 1);
-    move(board, 'down', 4);
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(Tetromino.T_SHAPE2);
     board.rotateBlockLeft();
+    move(board, 'down', 5);
+    board.drop(Tetromino.I_SHAPE2);
+    board.rotateBlockLeft();
+    board.moveBlock('left')
     move(board, 'down', 3);
     board.rotateBlockRight();
     expect(board.toString()).to.equalShape(
       `..........
        ..........
-       ..........
-       ....TT....
-       ...TTTT...
-       ....TT....`
+       ...I......
+       ...IT.....
+       ...ITT....
+       ...IT.....`
     );
   });
 
