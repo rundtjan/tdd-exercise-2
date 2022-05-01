@@ -54,7 +54,7 @@ describe("Moving falling tetrominoes", () => {
   });
 
   it("it cannot be moved left beyond the board", () => {
-    board.drop(Tetromino.O_SHAPE2);
+    board.drop(Tetromino.O_SHAPE);
     move(board, "left", 5);
     expect(board.toString()).to.equalShape(
       `OO........
