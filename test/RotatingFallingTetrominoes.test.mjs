@@ -229,8 +229,7 @@ describe("Rotating falling tetrominoes", () => {
     .......T.T
     ......TTTT
     .......T.T`;
-    let falling = false;
-    board.loadBoard(toLoad, falling);
+    board.loadBoard(toLoad);
     expect(board.toString()).to.equalShape(
       `..........
        ..........
@@ -242,14 +241,17 @@ describe("Rotating falling tetrominoes", () => {
   });
 
   it("a tetromino at right edge cannot rotate if there is no room to the left", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.rotateBlockLeft();
-    move(board, "right", 3);
-    move(board, "down", 4);
-    board.drop(Tetromino.T_SHAPE);
-    board.rotateBlockLeft();
+    board.loadBoard(      
+      `..........
+      ..........
+      ..........
+      .......T..
+      ......TT..
+      .......T..`)
+    board.drop(Tetromino.T_SHAPE2);
+    board.rotateBlockRight();
     move(board, "right", 5);
-    move(board, "down", 3);
+    move(board, "down", 4);
     board.rotateBlockLeft();
     expect(board.toString()).to.equalShape(
       `..........
