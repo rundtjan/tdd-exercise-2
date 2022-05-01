@@ -14,16 +14,13 @@ export class Board {
     this.falling = false;
   }
 
-  loadBoard(board, falling) {
+  loadBoard(board) {
     let boardArr = board.split('\n');
-    console.log('boardArr ', boardArr)
     for (let i = 0; i < this.board.length; i++){
       for (let j = 0; j < this.board[i].length; j++){
-        console.log('boardArr row ', boardArr[i].replace(/\s/g, "")[j])
         this.board[i][j] = boardArr[i].replace(/\s/g, "")[j];
       }
     }
-    this.falling = falling;
   }
 
   drop(block) {
