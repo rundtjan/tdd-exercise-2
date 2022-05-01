@@ -233,7 +233,12 @@ export class Board {
   landBlock() {
     this.drawOnBoard();
     this.falling = false;
-    //TODO: check for full line and erase
+    let newBoard = this.board.filter(elem => {if (elem.includes('.')) return elem;})
+    if (newBoard.length < this.board.length){
+      let points = this.board.length - newBoard.length;
+      for (let i = 0; i < points; i++) newBoard.unshift(this.board[0].map(() => '.'))
+      this.board = newBoard.slice();
+    } 
   }
 
   toString() {
