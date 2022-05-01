@@ -59,4 +59,28 @@ describe("Line clears", () => {
        IZZ....TLL`
     );
   });
+
+  it("Two lines dissolve if full, no matter space between them", () => {
+    board.loadBoard(      
+      `..........
+      ...I..J...
+      I.ZI..J...
+      IZZI.JJTLL
+      IZTI..TTTL
+      ITTT.IIIIL`
+
+    )
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateBlockRight()
+    move(board, 'down', 4)
+
+    expect(board.toString()).to.equalShape(
+      `..........
+      ..........
+      ..........
+      ...I..J...
+      I.ZII.J...
+      IZTII.TTTL`
+    );
+  });
 });
