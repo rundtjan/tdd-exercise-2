@@ -135,8 +135,7 @@ export class Board {
       case "down":
         if (this.canMoveDown()) this.falling.y++;
         else {
-          this.drawOnBoard();
-          this.falling = false;
+          this.landBlock()
         }
         break;
     }
@@ -227,9 +226,14 @@ export class Board {
       this.eraseBlock();
       this.falling.y++;
     } else {
-      this.drawOnBoard();
-      this.falling = false;
+      this.landBlock();
     }
+  }
+
+  landBlock() {
+    this.drawOnBoard();
+    this.falling = false;
+    //TODO: check for full line and erase
   }
 
   toString() {
