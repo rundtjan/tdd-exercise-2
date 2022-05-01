@@ -12,6 +12,15 @@ export class Board {
     }
     this.middle = width % 2 === 0 ? width / 2 - 1 : Math.floor(width / 2);
     this.falling = false;
+    this.listeners = [];
+  }
+
+  addListener(listener){
+    this.listeners.push(listener);
+  }
+
+  getListeners(){
+    return this.listeners;
   }
 
   loadBoard(board) {
