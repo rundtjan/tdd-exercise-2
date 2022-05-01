@@ -70,7 +70,7 @@ export class Board {
   }
 
   canRotate(direction) {
-    if (!this.falling.block.rotatable()) return;
+    if (!this.falling || !this.falling.block.rotatable()) return;
     if (this.falling.x < 0) return this.checkTurningSpace(direction, "leftEdge");
     else if (
       this.falling.x + this.falling.block.getSize() >
