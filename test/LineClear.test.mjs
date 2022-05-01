@@ -26,10 +26,6 @@ describe("Line clears", () => {
     )
     board.drop(Tetromino.T_SHAPE);
     move(board, 'down', 5)
-    expect(
-      board.hasFalling(),
-      "the player should still be able to move the block"
-    ).to.be.false;
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -38,6 +34,29 @@ describe("Line clears", () => {
        I.........
        I.......LL
        I.TTTT...L`
+    );
+  });
+
+  it("Two lines dissolve if full", () => {
+    board.loadBoard(      
+      `..........
+      ..........
+      I.Z.......
+      IZZ....TLL
+      IZT...TTTL
+      ITTT.IIIIL`
+
+    )
+    board.drop(Tetromino.T_SHAPE);
+    move(board, 'down', 5)
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       I.Z.......
+       IZZ....TLL`
     );
   });
 });
