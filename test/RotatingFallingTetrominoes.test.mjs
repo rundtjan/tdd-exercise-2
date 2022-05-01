@@ -210,6 +210,26 @@ describe("Rotating falling tetrominoes", () => {
     );
   });
 
+  it("testing loading board", () => {
+    let toLoad =       `..........
+    ..........
+    ..........
+    .......T.T
+    ......TTTT
+    .......T.T`
+    let falling = false;
+    board.loadBoard(toLoad, falling);
+    console.log('after loading', board.toString())
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       .......T.T
+       ......TTTT
+       .......T.T`
+    );
+  })
+
   it("a tetromino at right edge cannot rotate if there is no room to the left", () => {
     board.drop(Tetromino.T_SHAPE);
     board.rotateBlockLeft();
@@ -220,7 +240,6 @@ describe("Rotating falling tetrominoes", () => {
     move(board, 'right', 5);
     move(board, 'down', 3);
     board.rotateBlockLeft();
-    console.log(board.toString())
     expect(board.toString()).to.equalShape(
       `..........
        ..........

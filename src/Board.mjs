@@ -14,6 +14,18 @@ export class Board {
     this.falling = false;
   }
 
+  loadBoard(board, falling) {
+    let boardArr = board.split('\n');
+    console.log('boardArr ', boardArr)
+    for (let i = 0; i < this.board.length; i++){
+      for (let j = 0; j < this.board[i].length; j++){
+        console.log('boardArr row ', boardArr[i].replace(/\s/g, "")[j])
+        this.board[i][j] = boardArr[i].replace(/\s/g, "")[j];
+      }
+    }
+    this.falling = falling;
+  }
+
   drop(block) {
     if (this.falling) throw "already falling";
     let start =
@@ -52,7 +64,6 @@ export class Board {
   }
 
   checkTurningSpace(direction, edge) {
-    console.log('gets called with ', direction, edge)
     let testX;
     switch (edge) {
       case "leftEdge":
@@ -99,7 +110,6 @@ export class Board {
           testBlock.getShape()[i][j] != "." &&
           this.board[this.falling.y + i][testX + j] != "."
         ) {
-          console.log('returns false', i, j)
           return false;
         }
       }
