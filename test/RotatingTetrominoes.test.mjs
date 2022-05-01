@@ -49,7 +49,7 @@ describe("The T shape", () => {
 
 
 describe("The I shape", () => {
-  const shape = Tetromino.I_SHAPE2;
+  const shape = Tetromino.I_SHAPE;
   console.log('the shape', shape)
   it("initial orientation", () => {
     expect(shape.toString()).to.equalShape(

@@ -56,7 +56,7 @@ describe("Rotating falling tetrominoes", () => {
   });
 
   it("a rotated tetromino stops correctly at the lefthandside", () => {
-    board.drop(Tetromino.I_SHAPE2);
+    board.drop(Tetromino.I_SHAPE);
     board.rotateBlockRight();
     move(board, "left", 4);
     expect(board.toString()).to.equalShape(
@@ -136,7 +136,7 @@ describe("Rotating falling tetrominoes", () => {
       ..T.......
       ..TT......
       ..T.......`)
-    board.drop(Tetromino.I_SHAPE2);
+    board.drop(Tetromino.I_SHAPE);
     board.rotateBlockRight();
     move(board, "down", 3);
     board.rotateBlockLeft();
@@ -154,7 +154,7 @@ describe("Rotating falling tetrominoes", () => {
     board.drop(Tetromino.T_SHAPE);
     board.rotateBlockLeft();
     move(board, "down", 5);
-    board.drop(Tetromino.I_SHAPE2);
+    board.drop(Tetromino.I_SHAPE);
     board.rotateBlockLeft();
     board.moveBlock("left");
     move(board, "down", 3);
@@ -208,7 +208,7 @@ describe("Rotating falling tetrominoes", () => {
   });
 
   it("a tetromino at right edge can rotate if there is room to the left", () => {
-    board.drop(Tetromino.I_SHAPE2);
+    board.drop(Tetromino.I_SHAPE);
     board.rotateBlockRight();
     move(board, "right", 5);
     board.rotateBlockRight();
