@@ -1,3 +1,5 @@
+import { Tetromino } from "./Tetromino.mjs";
+
 export class Board {
   width;
   height;
@@ -14,6 +16,10 @@ export class Board {
     this.falling = false;
     this.listeners = [];
     this.level = 0;
+  }
+
+  getBlock(){
+    return Tetromino.I_SHAPE;
   }
 
   addListener(listener){
