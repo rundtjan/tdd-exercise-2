@@ -34,6 +34,7 @@ export class Board {
   }
 
   getBlock(){
+    if (this.shuffleBag.length === 0) this.shuffleBag = this.shuffle;
     return this.shuffleBag.pop();
   }
 

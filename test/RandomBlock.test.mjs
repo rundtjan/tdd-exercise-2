@@ -23,8 +23,16 @@ describe("Picking random blocks", () => {
   it("The board picks different blocks", () => {
     let tetros = [];
     let i = 0;
-    while (true) {tetros.push(board.getBlock()); i++; if (i > 10) break;};
+    while (true) {tetros.push(board.getBlock()); i++; if (i === 10) break;};
     expect(tetros.filter(elem => elem.toString() != tetros[0].toString()).length).to.not.equal(0);
+  });
+
+  it("The board picks different blocks from a shufflebag", () => {
+    expect(board.shuffleBag.length).to.equal(70);
+    let tetros = [];
+    let i = 0;
+    while (true) {tetros.push(board.getBlock()); i++; if (i === 10) break;};
+    expect(board.shuffleBag.length).to.equal(60);
   });
 
 });
