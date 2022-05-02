@@ -179,14 +179,14 @@ export class Board {
     if (side > 0) {
       return false;
     } else {
-      return this.checkLeftEdgeTouching();
+      return this.checkLeftEdgeTouching(direction);
     }
   }
 
-  checkLeftEdgeTouching() {
+  checkLeftEdgeTouching(direction) {
     let testBlock;
     let checker = false;
-    testBlock = this.falling.block.rotateLeft();
+    direction === 'left' ? testBlock = this.falling.block.rotateLeft() : testBlock = this.falling.block.rotateRight();
     for (let i = 0; i < this.falling.block.getSize(); i++) {
       for (let j = 0; j < this.falling.block.getSize(); j++) {
         if (testBlock.getShape()[i][j] != ".") {
@@ -196,7 +196,6 @@ export class Board {
         }
       }
     }
-    console.log("returning checker ", checker);
     return checker;
   }
 
