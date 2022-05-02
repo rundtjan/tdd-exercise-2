@@ -121,12 +121,12 @@ export class Board {
   canRotate(direction) {
     if (!this.falling || !this.falling.block.rotatable()) return;
     if (this.newPositionOk(direction, this.falling.x)) return true;
-    if (this.falling.x < 0) return this.checkTurningSpace(direction, "leftEdge");
+    if (this.falling.x < 0 && this.checkTurningSpace(direction, "leftEdge")) return true;
     else if (
       this.falling.x + this.falling.block.getSize() >
-      this.board[0].length
+      this.board[0].length && this.checkTurningSpace(direction, "rightEdge")
     )
-      return this.checkTurningSpace(direction, "rightEdge");
+      return true;
   }
 
   newPositionOk(direction, testX){
