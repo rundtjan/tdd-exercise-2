@@ -40,6 +40,10 @@ export class O_shape {
     return this;
   }
 
+  whoAmI(){
+    return "O_SHAPE";
+  }
+
   toString() {
     var output = "";
     this.shape.forEach((elem) => {

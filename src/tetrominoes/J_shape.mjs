@@ -60,6 +60,10 @@ export class J_shape {
     return new T_shape(this.direction);
   }
 
+  whoAmI(){
+    return "J_SHAPE";
+  }
+
   toString() {
     var output = "";
     this.shape.forEach((elem) => {

@@ -35,4 +35,18 @@ describe("Picking random blocks", () => {
     expect(board.shuffleBag.length).to.equal(60);
   });
 
+  it("All blocks are equally represented", () => {
+    let tetros = [];
+    let i = 0;
+    while (true) {tetros.push(board.getBlock()); i++; if (i === 70) break;};
+    expect(board.shuffleBag.length).to.equal(0);
+    expect(tetros.filter(elem => elem.whoAmI() === 'I_SHAPE').length).to.equal(10);
+    expect(tetros.filter(elem => elem.whoAmI() === 'J_SHAPE').length).to.equal(10);
+    expect(tetros.filter(elem => elem.whoAmI() === 'L_SHAPE').length).to.equal(10);
+    expect(tetros.filter(elem => elem.whoAmI() === 'Z_SHAPE').length).to.equal(10);
+    expect(tetros.filter(elem => elem.whoAmI() === 'T_SHAPE').length).to.equal(10);
+    expect(tetros.filter(elem => elem.whoAmI() === 'S_SHAPE').length).to.equal(10);
+    expect(tetros.filter(elem => elem.whoAmI() === 'O_SHAPE').length).to.equal(10);
+  });
+
 });

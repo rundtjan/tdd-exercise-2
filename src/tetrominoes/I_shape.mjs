@@ -53,6 +53,10 @@ export class I_shape {
     return this.rotate()
   }
 
+  whoAmI(){
+    return "I_SHAPE";
+  }
+
   toString() {
     var output = "";
     this.shape.forEach((elem) => {

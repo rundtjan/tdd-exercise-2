@@ -57,6 +57,10 @@ export class T_shape {
     return new T_shape(this.direction - 1);
   }
 
+  whoAmI(){
+    return "T_SHAPE";
+  }
+
   toString() {
     if (this.shape.length === 1) return this.shape[0][0];
     var output = "";

@@ -51,6 +51,10 @@ export class Z_shape {
     return this.rotate()
   }
 
+  whoAmI(){
+    return "Z_SHAPE";
+  }
+
   toString() {
     var output = "";
     this.shape.forEach((elem) => {
