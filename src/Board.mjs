@@ -17,17 +17,17 @@ export class Board {
     this.listeners = [];
     this.level = 0;
     this.shuffleBag = this.shuffle();
-    this.nameOfTest = ''
+    this.nameOfTest = "";
   }
 
-  setNameOfTest(name){
+  setNameOfTest(name) {
     this.nameOfTest = name;
   }
 
-  shuffle(){
+  shuffle() {
     let bag = [];
-    for (let i = 0; i < 70; i++){
-      bag.push(Tetromino.choose(Math.floor(i/10)));
+    for (let i = 0; i < 70; i++) {
+      bag.push(Tetromino.choose(Math.floor(i / 10)));
     }
     for (let i = bag.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -38,27 +38,27 @@ export class Board {
     return bag;
   }
 
-  getBlock(){
+  getBlock() {
     if (this.shuffleBag.length === 0) this.shuffleBag = this.shuffle();
     return this.shuffleBag.pop();
   }
 
-  addListener(listener){
+  addListener(listener) {
     this.listeners.push(listener);
   }
 
-  emitEvent(event){
-    this.listeners.forEach(listener => listener.update(event, this.level));
+  emitEvent(event) {
+    this.listeners.forEach((listener) => listener.update(event, this.level));
   }
 
-  levelUp(){
+  levelUp() {
     this.level++;
   }
 
   loadBoard(board) {
-    let boardArr = board.split('\n');
-    for (let i = 0; i < this.board.length; i++){
-      for (let j = 0; j < this.board[i].length; j++){
+    let boardArr = board.split("\n");
+    for (let i = 0; i < this.board.length; i++) {
+      for (let j = 0; j < this.board[i].length; j++) {
         this.board[i][j] = boardArr[i].replace(/\s/g, "")[j];
       }
     }
@@ -75,9 +75,9 @@ export class Board {
     this.falling = { block, y, x };
   }
 
-  getStartIndex(){
+  getStartIndex() {
     let start;
-    this.falling.y < 0 ? start = Math.abs(this.falling.y) : start = 0;
+    this.falling.y < 0 ? (start = Math.abs(this.falling.y)) : (start = 0);
     return start;
   }
 
@@ -85,7 +85,11 @@ export class Board {
     if (this.falling.block.getSize() === 1)
       this.board[this.falling.y][this.falling.x] = ".";
     else {
-      for (var i = this.getStartIndex(); i < this.falling.block.getSize(); i++) {
+      for (
+        var i = this.getStartIndex();
+        i < this.falling.block.getSize();
+        i++
+      ) {
         for (var j = 0; j < this.falling.block.getSize(); j++) {
           if (this.falling.block.getShape()[i][j] != ".")
             this.board[this.falling.y + i][this.falling.x + j] = ".";
@@ -115,49 +119,88 @@ export class Board {
       case "rightEdge":
         testX = this.falling.x - 1;
     }
-   if (this.newPositionOk(direction, testX)){
-     this.falling.x = testX;
-     return true;
-   } else {
-     return false;
-   };
+    if (this.newPositionOk(direction, testX)) {
+      this.falling.x = testX;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   canRotate(direction) {
     if (!this.falling || !this.falling.block.rotatable()) return;
     if (this.newPositionOk(direction, this.falling.x)) return true;
-    if (this.falling.x < 0 && this.checkTurningSpace(direction, "leftEdge")) return true;
+    if (this.falling.x < 0 && this.checkTurningSpace(direction, "leftEdge"))
+      return true;
     else if (
-      this.falling.x + this.falling.block.getSize() >
-      this.board[0].length && this.checkTurningSpace(direction, "rightEdge")
+      this.falling.x + this.falling.block.getSize() > this.board[0].length &&
+      this.checkTurningSpace(direction, "rightEdge")
     )
       return true;
-    return this.checkBlocking(direction)
+    return this.checkBlocking(direction);
   }
 
-  checkBlocking(direction){
+  checkBlocking(direction) {
     this.eraseBlock();
-    let middle = Math.floor(this.falling.block.getSize()/2);
+    let middle = Math.floor(this.falling.block.getSize() / 2);
     let side = 0;
-    for (let i = this.falling.y; i < this.falling.block.getSize()+this.falling.y; i++){
-      for (let j = this.falling.x; j < this.falling.block.getSize()+this.falling.x; j++){
-        if (this.board[i][j] != '.') j-this.falling.x > middle ? side ++ : side--;
+    for (
+      let i = this.falling.y;
+      i < this.falling.block.getSize() + this.falling.y;
+      i++
+    ) {
+      for (
+        let j = this.falling.x;
+        j < this.falling.block.getSize() + this.falling.x;
+        j++
+      ) {
+        if (this.board[i][j] != ".")
+          j - this.falling.x > middle ? side++ : side--;
       }
     }
     if (side > 0) {
-      if (this.newPositionOk(direction, this.falling.x-1)) return true;
-      else if (Tetromino.LONGS.includes(this.falling.block.whoAmI())) return this.checkDoublePush(direction, side);
+      if (this.newPositionOk(direction, this.falling.x - 1)) return true;
+      else if (
+        Tetromino.LONGS.includes(this.falling.block.whoAmI()) &&
+        this.checkDoublePush(direction, side)
+      )
+        return this.newPositionOk(direction, this.falling.x - 2);
     } else {
-      if (this.newPositionOk(direction, this.falling.x+1)) return true;
-      else if (Tetromino.LONGS.includes(this.falling.block.whoAmI())) return this.checkDoublePush(direction, side);
+      if (this.newPositionOk(direction, this.falling.x + 1)) return true;
+      else if (
+        Tetromino.LONGS.includes(this.falling.block.whoAmI()) &&
+        this.checkDoublePush(direction, side)
+      )
+        return this.newPositionOk(direction, this.falling.x + 2);
     }
   }
 
-  checkDoublePush(direction, side){
-    console.log('checking double push', direction, side);
+  checkDoublePush(direction, side) {
+    if (side > 0) {
+      return false;
+    } else {
+      return this.checkLeftEdgeTouching();
+    }
   }
 
-  newPositionOk(direction, testX){
+  checkLeftEdgeTouching() {
+    let testBlock;
+    let checker = false;
+    testBlock = this.falling.block.rotateLeft();
+    for (let i = 0; i < this.falling.block.getSize(); i++) {
+      for (let j = 0; j < this.falling.block.getSize(); j++) {
+        if (testBlock.getShape()[i][j] != ".") {
+          if (this.board[i + this.falling.y][j + this.falling.x + 1] != ".")
+            checker = true;
+          j = this.falling.block.getSize();
+        }
+      }
+    }
+    console.log("returning checker ", checker);
+    return checker;
+  }
+
+  newPositionOk(direction, testX) {
     let testBlock;
     switch (direction) {
       case "left":
@@ -169,7 +212,7 @@ export class Board {
       case "same":
         testBlock = this.falling.block;
     }
-    this.eraseBlock()
+    this.eraseBlock();
     for (let i = this.getStartIndex(); i < testBlock.getSize(); i++) {
       for (let j = 0; j < testBlock.getSize(); j++) {
         if (
@@ -189,15 +232,15 @@ export class Board {
     this.eraseBlock();
     switch (direction) {
       case "left":
-        this.newPositionOk('same', this.falling.x - 1);
+        this.newPositionOk("same", this.falling.x - 1);
         break;
       case "right":
-        this.newPositionOk('same', this.falling.x + 1);
+        this.newPositionOk("same", this.falling.x + 1);
         break;
       case "down":
         if (this.canMoveDown()) this.falling.y++;
         else {
-          this.landBlock()
+          this.landBlock();
         }
         break;
     }
@@ -230,7 +273,11 @@ export class Board {
         this.board[this.falling.y][this.falling.x] =
           this.falling.block.toString();
       } else {
-        for (var i = this.getStartIndex(); i < this.falling.block.getSize(); i++) {
+        for (
+          var i = this.getStartIndex();
+          i < this.falling.block.getSize();
+          i++
+        ) {
           for (var j = 0; j < this.falling.block.getSize(); j++) {
             if (this.falling.block.getShape()[i][j] != ".")
               this.board[this.falling.y + i][this.falling.x + j] =
@@ -258,13 +305,16 @@ export class Board {
   landBlock() {
     this.drawOnBoard();
     this.falling = false;
-    let newBoard = this.board.filter(elem => {if (elem.includes('.')) return elem;})
-    if (newBoard.length < this.board.length){
+    let newBoard = this.board.filter((elem) => {
+      if (elem.includes(".")) return elem;
+    });
+    if (newBoard.length < this.board.length) {
       let lines = this.board.length - newBoard.length;
-      for (let i = 0; i < lines; i++) newBoard.unshift(this.board[0].map(() => '.'))
+      for (let i = 0; i < lines; i++)
+        newBoard.unshift(this.board[0].map(() => "."));
       this.board = newBoard.slice();
       this.emitEvent(lines);
-    } 
+    }
   }
 
   toString() {
