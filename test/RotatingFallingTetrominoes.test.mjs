@@ -313,7 +313,7 @@ describe("Rotating falling tetrominoes", () => {
     );
   });
 
-  it("a long tetromino can push away by two distance elements", () => {
+  it("a tetromino can push away by two distance elements to the right", () => {
     board.loadBoard(      
       `..........
       ..........
@@ -324,7 +324,6 @@ describe("Rotating falling tetrominoes", () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateBlockLeft();
     move(board, "down", 3);
-    board.setNameOfTest('push')
     board.rotateBlockLeft();
     expect(board.toString()).to.equalShape(
       `..........
@@ -335,4 +334,5 @@ describe("Rotating falling tetrominoes", () => {
       ...I......`
     );
   });
+
 });

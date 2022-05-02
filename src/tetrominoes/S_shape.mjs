@@ -43,8 +43,8 @@ export class S_shape {
   }
 
   rotate() {
-    this.direction === 0 ? this.direction = 1 : this.direction = 0;
-    return new I_shape(this.direction);
+    if (this.direction === 0) return new S_shape(1);
+    return new S_shape(0);
   }
 
   rotateLeft() {

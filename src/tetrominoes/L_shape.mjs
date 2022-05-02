@@ -49,15 +49,13 @@ export class L_shape {
   }
   
   rotateRight() {
-    this.direction++;
-    if (this.direction > 3) this.direction = 0;
-    return new T_shape(this.direction);
+    if (this.direction === 3) return new L_shape(0);
+    return new L_shape(this.direction + 1);
   }
 
   rotateLeft() {
-    this.direction--;
-    if (this.direction < 0) this.direction = 3;
-    return new T_shape(this.direction);
+    if (this.direction === 0) return new L_shape(3);
+    return new L_shape(this.direction - 1);
   }
 
   whoAmI(){
