@@ -49,4 +49,22 @@ describe("Picking random blocks", () => {
     expect(tetros.filter(elem => elem.whoAmI() === 'O_SHAPE').length).to.equal(10);
   });
 
+  it("Shufflebag gives different arrays of blocks at different times", () => {
+    let counter = 0;
+    for (let i = 0; i < 1000; i++){
+      let tetros = [];
+      let j = 0;
+      while (true) {tetros.push(board.getBlock()); j++; if (j === 70) break;};
+      let tetros2 = [];
+      let k = 0;
+      while (true) {tetros2.push(board.getBlock()); k++; if (k === 70) break;};
+      let checker = false;
+      for (let l = 0; l < tetros.length; l++){
+        if (tetros[l].whoAmI() != tetros2[l].whoAmI()) checker = true;
+      }
+      if (!checker) counter++;
+    }
+    expect(counter).to.be.below(2);
+  });
+
 });
