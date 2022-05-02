@@ -19,8 +19,8 @@ export class Board {
     this.listeners.push(listener);
   }
 
-  getListeners(){
-    return this.listeners;
+  emitEvent(event){
+    this.listeners.forEach(listener => listener(event));
   }
 
   loadBoard(board) {
@@ -244,9 +244,10 @@ export class Board {
     this.falling = false;
     let newBoard = this.board.filter(elem => {if (elem.includes('.')) return elem;})
     if (newBoard.length < this.board.length){
-      let points = this.board.length - newBoard.length;
-      for (let i = 0; i < points; i++) newBoard.unshift(this.board[0].map(() => '.'))
+      let lines = this.board.length - newBoard.length;
+      for (let i = 0; i < lines; i++) newBoard.unshift(this.board[0].map(() => '.'))
       this.board = newBoard.slice();
+      this.emitEvent(lines);
     } 
   }
 
