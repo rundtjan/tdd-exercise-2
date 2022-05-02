@@ -67,9 +67,20 @@ describe("Scoring", () => {
     expect(mock.calledWith(2)).to.be.true;
   });
 
-  it("The scorecounter can calculate scores for line clears of 1 at a time", () => {
+  it("The scorecounter can calculate scores for a line clears of 1 row", () => {
     scoreCounter.update(1);
     expect(scoreCounter.getScore()).to.equal(40);
+  });
+
+  it("The scorecounter adds scores correctly", () => {
+    scoreCounter.update(1);
+    scoreCounter.update(1);
+    expect(scoreCounter.getScore()).to.equal(80);
+  });
+
+  it("The scorecounter can calculate scores for 2 line clears at a time", () => {
+    scoreCounter.update(2);
+    expect(scoreCounter.getScore()).to.equal(100);
   });
 
   xit("Two lines dissolve if full, no matter space between them", () => {
