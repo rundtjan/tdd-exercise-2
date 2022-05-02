@@ -24,6 +24,10 @@ export class Board {
     this.listeners.forEach(listener => listener.update(event, this.level));
   }
 
+  levelUp(){
+    this.level++;
+  }
+
   loadBoard(board) {
     let boardArr = board.split('\n');
     for (let i = 0; i < this.board.length; i++){

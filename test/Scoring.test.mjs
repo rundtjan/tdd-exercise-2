@@ -147,6 +147,22 @@ describe("Scoring", () => {
     expect(scoreCounter.getScore()).to.equal(40);
   })
 
+  it("The board can emit level info to the scorecounter", () =>{
+    board.addListener(scoreCounter);
+    board.loadBoard(      
+      `..........
+      ..........
+      I.........
+      I.......LL
+      I.T......L
+      ITTT.IIIIL`
+    )
+    board.drop(Tetromino.T_SHAPE);
+    board.levelUp();
+    move(board, 'down', 5)
+    expect(scoreCounter.getScore()).to.equal(80);
+  })
+
   xit("Two lines dissolve if full, no matter space between them", () => {
     board.loadBoard(      
       `..........
