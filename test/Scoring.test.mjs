@@ -68,39 +68,44 @@ describe("Scoring", () => {
   });
 
   it("The scorecounter can calculate scores for a line clears of 1 row", () => {
-    scoreCounter.update(1);
+    scoreCounter.update(1,0);
     expect(scoreCounter.getScore()).to.equal(40);
   });
 
   it("The scorecounter adds scores correctly", () => {
-    scoreCounter.update(1);
-    scoreCounter.update(1);
+    scoreCounter.update(1,0);
+    scoreCounter.update(1,0);
     expect(scoreCounter.getScore()).to.equal(80);
   });
 
   it("The scorecounter can calculate scores for 2 line clears at a time", () => {
-    scoreCounter.update(2);
+    scoreCounter.update(2,0);
     expect(scoreCounter.getScore()).to.equal(100);
   });
 
   it("The scorecounter can calculate scores for 3 line clears at a time", () => {
-    scoreCounter.update(3);
+    scoreCounter.update(3,0);
     expect(scoreCounter.getScore()).to.equal(300);
   });
 
   it("The scorecounter can calculate scores for 4 line clears at a time", () => {
-    scoreCounter.update(4);
+    scoreCounter.update(4,0);
     expect(scoreCounter.getScore()).to.equal(1200);
   });
 
+  it("The scorecounter can handle info concerning level", () => {
+    scoreCounter.update(1, 1);
+    expect(scoreCounter.getScore()).to.equal(80);
+  });
+
   it("The scorecounter can calculate different scores for different amounts of line clears at a time", () => {
-    scoreCounter.update(4);
+    scoreCounter.update(4,0);
     expect(scoreCounter.getScore()).to.equal(1200);
-    scoreCounter.update(1);
+    scoreCounter.update(1,0);
     expect(scoreCounter.getScore()).to.equal(1240);
-    scoreCounter.update(3);
+    scoreCounter.update(3,0);
     expect(scoreCounter.getScore()).to.equal(1540);
-    scoreCounter.update(2);
+    scoreCounter.update(2,0);
     expect(scoreCounter.getScore()).to.equal(1640);
   });
 
