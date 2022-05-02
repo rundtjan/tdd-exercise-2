@@ -23,4 +23,8 @@ export class Tetromino {
 
   static J_SHAPE = new J_shape(0);
 
+  static choose(index){
+    return [Tetromino.I_SHAPE, Tetromino.J_SHAPE, Tetromino.L_SHAPE, Tetromino.O_SHAPE, Tetromino.S_SHAPE, Tetromino.T_SHAPE, Tetromino.Z_SHAPE][index];
+  }
+
 }

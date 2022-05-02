@@ -20,4 +20,11 @@ describe("Picking random blocks", () => {
     expect(board.getBlock()).to.be.an('object');
   });
 
+  it("The board picks different blocks", () => {
+    let tetros = [];
+    let i = 0;
+    while (true) {tetros.push(board.getBlock()); i++; if (i > 10) break;};
+    expect(tetros.filter(elem => elem.toString() != tetros[0].toString()).length).to.not.equal(0);
+  });
+
 });

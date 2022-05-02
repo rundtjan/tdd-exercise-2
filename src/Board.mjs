@@ -16,10 +16,18 @@ export class Board {
     this.falling = false;
     this.listeners = [];
     this.level = 0;
+    //this.shuffleBag = this.shuffle();
   }
 
+  /*shuffle(){
+    let bag = [];
+    for (let i = 0; i < 100; i++){
+
+    }
+  }*/
+
   getBlock(){
-    return Tetromino.I_SHAPE;
+    return Tetromino.choose(Math.floor(7*Math.random()));
   }
 
   addListener(listener){
