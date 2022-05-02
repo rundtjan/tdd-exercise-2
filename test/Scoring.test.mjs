@@ -88,6 +88,11 @@ describe("Scoring", () => {
     expect(scoreCounter.getScore()).to.equal(300);
   });
 
+  it("The scorecounter can calculate scores for 4 line clears at a time", () => {
+    scoreCounter.update(4);
+    expect(scoreCounter.getScore()).to.equal(1200);
+  });
+
   xit("Two lines dissolve if full, no matter space between them", () => {
     board.loadBoard(      
       `..........

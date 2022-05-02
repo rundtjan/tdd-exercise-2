@@ -17,6 +17,9 @@ export class ScoreCounter {
       case 3:
         this.score += 300 * (this.level+1);
         break;
+      case 4:
+        this.score += 1200 * (this.level+1);
+        break;
     }
   }
 
