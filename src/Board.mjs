@@ -146,7 +146,9 @@ export class Board {
     }
     if (side > 0) {
       if (this.newPositionOk(direction, this.falling.x-1)) return true;
-    } 
+    } else {
+      if (this.newPositionOk(direction, this.falling.x+1)) return true;
+    }
   }
 
   newPositionOk(direction, testX){
