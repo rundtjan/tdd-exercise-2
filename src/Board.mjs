@@ -16,18 +16,25 @@ export class Board {
     this.falling = false;
     this.listeners = [];
     this.level = 0;
-    //this.shuffleBag = this.shuffle();
+    this.shuffleBag = this.shuffle();
   }
 
-  /*shuffle(){
+  shuffle(){
     let bag = [];
-    for (let i = 0; i < 100; i++){
-
+    for (let i = 0; i < 70; i++){
+      bag.push(Tetromino.choose(Math.floor(i/10)));
     }
-  }*/
+    for (let i = bag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = bag[i];
+      bag[i] = bag[j];
+      bag[j] = temp;
+    }
+    return bag;
+  }
 
   getBlock(){
-    return Tetromino.choose(Math.floor(7*Math.random()));
+    return this.shuffleBag.pop();
   }
 
   addListener(listener){
