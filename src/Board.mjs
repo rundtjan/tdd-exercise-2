@@ -13,6 +13,7 @@ export class Board {
     this.middle = width % 2 === 0 ? width / 2 - 1 : Math.floor(width / 2);
     this.falling = false;
     this.listeners = [];
+    this.level = 0;
   }
 
   addListener(listener){
@@ -20,7 +21,7 @@ export class Board {
   }
 
   emitEvent(event){
-    this.listeners.forEach(listener => listener(event));
+    this.listeners.forEach(listener => listener.update(event, this.level));
   }
 
   loadBoard(board) {

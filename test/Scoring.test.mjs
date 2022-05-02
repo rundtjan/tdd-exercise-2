@@ -25,7 +25,7 @@ describe("Scoring", () => {
   });
 
   it("The listener gets called when a line is cleared", () => {
-    let mock = sinon.fake()
+    let mock = {update: sinon.fake()}
     board.addListener(mock);
     board.loadBoard(      
       `..........
@@ -46,11 +46,11 @@ describe("Scoring", () => {
         I.......LL
         I.TTTT...L`
     );
-    expect(mock.calledOnce).to.be.true;
+    expect(mock.update.calledOnce).to.be.true;
   });
 
   it("The listener gets called with the amount of lines cleared", () => {
-    let mock = sinon.fake()
+    let mock = {update: sinon.fake()}
     board.addListener(mock);
     board.loadBoard(      
       `..........
@@ -64,7 +64,7 @@ describe("Scoring", () => {
     board.drop(Tetromino.T_SHAPE);
     move(board, 'down', 5)
   
-    expect(mock.calledWith(2)).to.be.true;
+    expect(mock.update.calledWith(2)).to.be.true;
   });
 
   it("The scorecounter can calculate scores for a line clears of 1 row", () => {
@@ -131,6 +131,21 @@ describe("Scoring", () => {
     });
 
   });
+
+  it("The board can emit line clears to the scorecounter", () =>{
+    board.addListener(scoreCounter);
+    board.loadBoard(      
+      `..........
+      ..........
+      I.........
+      I.......LL
+      I.T......L
+      ITTT.IIIIL`
+    )
+    board.drop(Tetromino.T_SHAPE);
+    move(board, 'down', 5)
+    expect(scoreCounter.getScore()).to.equal(40);
+  })
 
   xit("Two lines dissolve if full, no matter space between them", () => {
     board.loadBoard(      
