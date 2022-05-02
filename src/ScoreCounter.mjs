@@ -6,7 +6,6 @@ export class ScoreCounter {
   }
 
   update(lines, level){
-    console.log(level);
     switch(lines){
       case 1:
         this.score += 40 * (level+1);

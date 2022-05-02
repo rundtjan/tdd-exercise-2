@@ -1,14 +1,5 @@
 import { expect } from "chai";
-import sinon from "sinon";
 import { Board } from "../src/Board.mjs";
-import { Tetromino } from "../src/Tetromino.mjs";
-import { ScoreCounter } from '../src/ScoreCounter.mjs';
-
-function move(board, direction, times) {
-  for (let i = 0; i < times; i++) {
-    board.moveBlock(direction);
-  }
-}
 
 describe("Picking random blocks", () => {
   let board;
