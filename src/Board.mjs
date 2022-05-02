@@ -17,6 +17,11 @@ export class Board {
     this.listeners = [];
     this.level = 0;
     this.shuffleBag = this.shuffle();
+    this.nameOfTest = ''
+  }
+
+  setNameOfTest(name){
+    this.nameOfTest = name;
   }
 
   shuffle(){
@@ -127,6 +132,21 @@ export class Board {
       this.board[0].length && this.checkTurningSpace(direction, "rightEdge")
     )
       return true;
+    return this.checkBlocking(direction)
+  }
+
+  checkBlocking(direction){
+    this.eraseBlock();
+    let middle = Math.floor(this.falling.block.getSize()/2);
+    let side = 0;
+    for (let i = this.falling.y; i < this.falling.block.getSize()+this.falling.y; i++){
+      for (let j = this.falling.x; j < this.falling.block.getSize()+this.falling.x; j++){
+        if (this.board[i][j] != '.') j-this.falling.x > middle ? side ++ : side--;
+      }
+    }
+    if (side > 0) {
+      if (this.newPositionOk(direction, this.falling.x-1)) return true;
+    } 
   }
 
   newPositionOk(direction, testX){
@@ -155,8 +175,6 @@ export class Board {
     this.falling.x = testX;
     return true;
   }
-
-
 
   moveBlock(direction) {
     if (!this.falling) return;
