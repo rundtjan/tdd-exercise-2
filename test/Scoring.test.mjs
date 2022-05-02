@@ -93,11 +93,6 @@ describe("Scoring", () => {
     expect(scoreCounter.getScore()).to.equal(1200);
   });
 
-  it("The scorecounter can handle info concerning level", () => {
-    scoreCounter.update(1, 1);
-    expect(scoreCounter.getScore()).to.equal(80);
-  });
-
   it("The scorecounter can calculate different scores for different amounts of line clears at a time", () => {
     scoreCounter.update(4,0);
     expect(scoreCounter.getScore()).to.equal(1200);
@@ -107,6 +102,34 @@ describe("Scoring", () => {
     expect(scoreCounter.getScore()).to.equal(1540);
     scoreCounter.update(2,0);
     expect(scoreCounter.getScore()).to.equal(1640);
+  });
+
+  describe("The scorecounter can handle info concerning level", () => {
+    it("Level 1 with 1", () => {
+        scoreCounter.update(1, 1);
+        expect(scoreCounter.getScore()).to.equal(80);
+    });
+
+    it("Level 9 with 1", () => {
+      scoreCounter.update(1, 9);
+      expect(scoreCounter.getScore()).to.equal(400);
+    });
+
+    it("Level 1 with 2", () => {
+      scoreCounter.update(2, 1);
+      expect(scoreCounter.getScore()).to.equal(200);
+    });
+
+    it("Level 2 with 3", () => {
+      scoreCounter.update(3, 2);
+      expect(scoreCounter.getScore()).to.equal(900);
+    });
+
+    it("Level 9 with 4", () => {
+      scoreCounter.update(4, 9);
+      expect(scoreCounter.getScore()).to.equal(12000);
+    });
+
   });
 
   xit("Two lines dissolve if full, no matter space between them", () => {

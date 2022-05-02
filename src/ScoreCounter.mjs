@@ -27,4 +27,8 @@ export class ScoreCounter {
     return this.score;
   }
 
+  clearScoreTestsOnly(){
+    this.score = 0;
+  }
+
 }
