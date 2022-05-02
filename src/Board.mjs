@@ -146,9 +146,15 @@ export class Board {
     }
     if (side > 0) {
       if (this.newPositionOk(direction, this.falling.x-1)) return true;
+      else if (Tetromino.LONGS.includes(this.falling.block.whoAmI())) return this.checkDoublePush(direction, side);
     } else {
       if (this.newPositionOk(direction, this.falling.x+1)) return true;
+      else if (Tetromino.LONGS.includes(this.falling.block.whoAmI())) return this.checkDoublePush(direction, side);
     }
+  }
+
+  checkDoublePush(direction, side){
+    console.log('checking double push', direction, side);
   }
 
   newPositionOk(direction, testX){
