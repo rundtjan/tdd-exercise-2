@@ -91,8 +91,13 @@ export class Board {
 
   rotateBlockLeft() {
     if (this.canRotate("left")) {
-      this.eraseBlock();
       this.falling.block = this.falling.block.rotateLeft();
+    }
+  }
+
+  rotateBlockRight() {
+    if (this.canRotate("right")) {
+      this.falling.block = this.falling.block.rotateRight();
     }
   }
 
@@ -115,13 +120,13 @@ export class Board {
 
   canRotate(direction) {
     if (!this.falling || !this.falling.block.rotatable()) return;
+    if (this.newPositionOk(direction, this.falling.x)) return true;
     if (this.falling.x < 0) return this.checkTurningSpace(direction, "leftEdge");
     else if (
       this.falling.x + this.falling.block.getSize() >
       this.board[0].length
     )
       return this.checkTurningSpace(direction, "rightEdge");
-    return this.newPositionOk(direction, this.falling.x);
   }
 
   newPositionOk(direction, testX){
@@ -151,12 +156,7 @@ export class Board {
     return true;
   }
 
-  rotateBlockRight() {
-    if (this.canRotate("right")) {
-      this.eraseBlock();
-      this.falling.block = this.falling.block.rotateRight();
-    }
-  }
+
 
   moveBlock(direction) {
     if (!this.falling) return;
